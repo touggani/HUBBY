@@ -8,4 +8,4 @@ Within the Catholic University of Lille, more specifically at the Faculty of Man
 You can found all the project managment files into the project_managment repository.
 
 ## Other link
-*Trello: https://trello.com/invite/b/gycjSy2p/d0183a5e2222f8ebd0bb51bfa836fa2c/suivi-davancement
+* Trello: https://trello.com/invite/b/gycjSy2p/d0183a5e2222f8ebd0bb51bfa836fa2c/suivi-davancement
