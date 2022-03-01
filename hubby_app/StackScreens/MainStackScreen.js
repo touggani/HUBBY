@@ -1,9 +1,9 @@
 import * as React from 'react';
- import { View, Text } from 'react-native';
- import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
- import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
- import HomeStackScreen from "./HomeStackScreen"
-
+import { View, Text } from 'react-native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import HomeStackScreen from "./HomeStackScreen"
+import MenuStackScreen from './MenuStackScreen';
 
 
  const Tab = createBottomTabNavigator();
@@ -33,7 +33,17 @@ import * as React from 'react';
                   <MaterialCommunityIcons name="home" color={color} size={50} />
                 ),
                 tabBarShowLabel:false,
-              }}/>
+          }}/>
+          <Tab.Screen 
+            name="MenuStack" 
+            component={MenuStackScreen}
+            
+            options={{
+                tabBarIcon: ({ color, size }) => (
+                  <MaterialCommunityIcons name="silverware-fork-knife" color={color} size={50} />
+                ),
+                tabBarShowLabel:false,
+          }}/>
               
        </Tab.Navigator>
    );

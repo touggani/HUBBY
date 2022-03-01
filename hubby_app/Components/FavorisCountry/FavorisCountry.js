@@ -7,7 +7,8 @@ export default function FavorisCountry({navigation}) {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>Pays Favoris</Text>
+            <Text style={styles.title}>Pays</Text>
+            <Text style={styles.title}>Favoris</Text>
             <View style={{height:200}}>
                 <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} style={styles.favorisList}>
                     <FavorisButton isActive={false}/>
@@ -29,9 +30,8 @@ const styles = StyleSheet.create({
     },
     title:{
         fontWeight: 'bold',
-        fontSize:40,
-        width:170,
-        paddingLeft:30
+        fontSize:35,
+        paddingLeft:30,
     },
     favorisList:{
         paddingLeft:20,
