@@ -38,10 +38,10 @@ export default function Menu({navigation}) {
                 />
                 <MaterialCommunityIcons name="filter" size={40} color={"#E8B7B7"} style={{left:0,top:15}}/>
             </View>
-            <ScrollView style={{}}>
+            <ScrollView style={{paddingBottom:400, flex: 1}}>
                 <View style={styles.topMenu}>
-                    <Text style={[styles.topMenuComponent, active === 1 ? styles.topMenuComponentPays : null ]} onPress={() => {setActive(1)}}>A-Z</Text>
-                    <Text style={[styles.topMenuComponent, active === 2 ? styles.topMenuComponentAZ : null]} onPress={() => {setActive(2)}}>Pays</Text>
+                    <View style={styles.topMenuComponent}><Text style={[active === 1 ? styles.topMenuComponentPays : null ]} onPress={() => {setActive(1)}}>A-Z</Text></View>
+                    <View style={styles.topMenuComponent}><Text style={[active === 2 ? styles.topMenuComponentAZ : null]} onPress={() => {setActive(2)}}>Pays</Text></View>
                 </View>
                 <View>
                     <View style={styles.list}> 
@@ -57,11 +57,10 @@ export default function Menu({navigation}) {
 
 const styles = StyleSheet.create({
     container:{
-        flex: 3,
+        flex: 1,
         paddingHorizontal:'7%',
     },
     topMenu:{
-        flex:2,
         flexDirection:'row',
         top:30, 
         borderWidth:1, 
@@ -69,25 +68,30 @@ const styles = StyleSheet.create({
         paddingTop:3,
         paddingBottom:3,
         borderRadius:30,
-        paddingRight:3,
-        paddingLeft:3,
     },
     topMenuComponent:{
-        paddingRight:70,
-        paddingLeft:70,
-        paddingTop:20,
-        paddingBottom:20,
-        borderRadius:30,
-        overflow:"hidden"
+        flex:1,
+        alignItems:'center',
+        justifyContent:'center'
+        
     },
     topMenuComponentAZ:{
         backgroundColor:'#E8B7B7',
         borderRadius:30,
+        paddingVertical:15,
+        paddingHorizontal:70,
+        borderRadius:25,
+        overflow:"hidden",
+        
         
     },
     topMenuComponentPays:{
         backgroundColor:'#E8B7B7',
         borderRadius:30,
+        paddingVertical:15,
+        paddingHorizontal:70,
+        borderRadius:25,
+        overflow:"hidden",
     },
     list:{
         top:60,

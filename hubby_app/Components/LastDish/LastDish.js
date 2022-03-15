@@ -10,6 +10,9 @@ export default function LastDish({navigation}) {
             <Text style={styles.title}>consultées</Text>
 
             <DishPreview/>
+            <DishPreview/>
+            <DishPreview/>
+            <DishPreview/>
         </View>
     );
 }
