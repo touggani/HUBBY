@@ -12,9 +12,10 @@ export default function Home({navigation}) {
 
     return (
         <View style={[styles.container, {paddingTop: insets.top}]}>
-            <ScrollView style={{paddingBottom:30}}>
-            <FavorisCountry/>
-            <LastDish/></ScrollView>
+            <ScrollView style={{paddingBottom:30, flex:1}}>
+                <FavorisCountry/>
+                <LastDish/>
+            </ScrollView>
         </View>
     );
 }

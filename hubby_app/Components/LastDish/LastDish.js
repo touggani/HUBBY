@@ -16,14 +16,12 @@ export default function LastDish({navigation}) {
 
 const styles = StyleSheet.create({
     container:{
-        flex:4,
-        paddingTop:30,
         paddingBottom:30
     },
 
     title:{
         fontWeight: 'bold',
-        fontSize:35,
+        fontSize:30,
         paddingLeft:30
     },
 });

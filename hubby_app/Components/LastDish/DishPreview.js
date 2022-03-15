@@ -16,8 +16,8 @@ export default function DishPreview({navigation}) {
                 </View>
                 </ImageBackground>
                 <View style={{flexDirection: 'row', justifyContent: 'flex-end'}}>
-                    <Text style={{flex:2, left:60, fontSize:20}}>Burger</Text>
-                    <Text style={{right:60,fontSize:20}}><MaterialCommunityIcons name="home" size={20} /> International</Text>
+                    <Text style={{flex:2, left:"300%", fontSize:17}}>Burger</Text>
+                    <Text style={{right:"300%",fontSize:17}}><MaterialCommunityIcons name="home" size={17} /> International</Text>
                 </View>
             </TouchableOpacity>
             

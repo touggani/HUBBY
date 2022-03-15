@@ -37,7 +37,7 @@ export default function Log({navigation}) {
         
         <View style={[styles.container, {paddingTop: insets.top,paddingBottom: insets.bottom,}]}>
             <Image source={require('../Illustrations/gif-menu.gif')} style={styles.gif} />
-            <View style={{flex: 2, alignItems:'center'}}>
+            <View style={{flex: 5, alignItems:'center',top:70}}>
                 <Text style={styles.txt1}>Bienvenue sur HUBBY</Text>
                 <Text style={styles.txt2}>Prêt à découvrir des milliers de recettes autour du monde</Text>
                 <Btn color={'white'} text={"S'inscrire"}/>
@@ -58,23 +58,24 @@ const styles = StyleSheet.create({
     container:{
         flex: 1,
         alignItems:'center',
-        backgroundColor:'#FFC5BB'
+        backgroundColor:'#FFC5BB',
     },
     gif:{
-        flex: 2,
-        width:'90%',
-        height:'30%'
+        flex: 3,
+        width:'100%',
+        height:'50%',
+        top:70
     },
     txt1:{
         marginTop:'20%',
         textAlign:'center',
         fontWeight:'bold',
-        fontSize:25
+        fontSize:20
     },
     txt2:{
         marginTop:'5%',
         textAlign:'center',
-        fontSize:18,
+        fontSize:15,
         paddingLeft:25,
         paddingRight:25
     },

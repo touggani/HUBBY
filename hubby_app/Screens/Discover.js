@@ -19,9 +19,16 @@ export default function Discover({navigation}) {
                     controlsProps={{
                       dotsTouchable: true,
                       prevTitle:"",
-                      nextTitle:"",
-                      dotsWrapperStyle:{
-                          width:100
+                      nextTitle:"Suivant",
+                      nextPos: 'top-right',
+                      prevPos: 'top',
+                      
+                      nextTitleStyle:{
+                        bottom:100,
+                        right:'340%',
+                        alignContent:'center',
+                        color:'black'
+
                       }
                     }}
                   >

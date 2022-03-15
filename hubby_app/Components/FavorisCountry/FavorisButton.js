@@ -18,13 +18,12 @@ export default function FavorisButton({navigation,isActive}) {
 
 const styles = StyleSheet.create({
     container:{
-        width:85,
-        height:160,
+        width:75,
+        height:120,
         alignItems:'center',
         borderRadius:50,
         borderColor:'black',
         paddingTop:10,
-        paddingBottom:30,
         top:10,
         shadowColor: "#000",
         shadowOffset: {
@@ -40,22 +39,22 @@ const styles = StyleSheet.create({
         
     },
     circle:{
-        width:70,
-        height:70,
+        width:60,
+        height:60,
         borderRadius:50,
         backgroundColor:'#FFC5BB',
         alignItems:'center',
         justifyContent:'center'
     },
     flag:{
-        width: 50,
-        height: 50,
+        width: 40,
+        height: 40,
         borderRadius:50,
         
     },
     nom:{
-        fontSize:17,
-        paddingTop:20
+        fontSize:15,
+        paddingTop:10
     },
     bgPink:{
         backgroundColor:"#FFC5BB",
