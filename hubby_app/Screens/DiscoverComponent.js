@@ -5,6 +5,8 @@ import FadeInOut from 'react-native-fade-in-out';
 import LottieView from 'lottie-react-native';
 import Btn from '../Components/Btn';
 import { LoremIpsum } from "lorem-ipsum";
+import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
+
 
 export default function DiscoverComponent({page, navigation}) {
 
@@ -43,7 +45,7 @@ export default function DiscoverComponent({page, navigation}) {
                     </FadeInOut>
                     </View>
                     <View style={{flex:1}}>
-                        <Text>Bienvenue sur HUBBY</Text>
+                        <Text style={styles.title}>Bienvenue sur HUBBY</Text>
                     </View>
                 </View>:
                 <View>
@@ -75,21 +77,23 @@ export default function DiscoverComponent({page, navigation}) {
 
 const styles = StyleSheet.create({
     tinyLogo:{
-        width:280,
-        height:280
+        height: hp('30%'),
+        width: wp('60%')
     },
     title:{
-        fontSize:30
+        fontSize: hp('2%')
     },
     gif:{
-        width:"100%",
-        bottom:30
+        height: hp('40%'),
+        width: wp('40%'),
+        bottom:30,
     },
     description:{
         flex:2,
         alignItems:'center',
         paddingRight:25,
-        paddingLeft:25
+        paddingLeft:25,
+        fontSize:40
     }
     
 });
