@@ -23,23 +23,21 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         flexDirection:"row",
         display:'flex',
-        paddingLeft: 20,
-        paddingRight:20,
-        paddingBottom:30,
-        paddingTop:30,
+        paddingHorizontal: 10,
+        paddingVertical: '6%',
         borderRadius:40,
         width:'100%',
         alignItems: 'center'
     },
     text:{
-        fontSize:20,
+        fontSize:16,
         textAlign: 'center',
         marginLeft: 20
     },
     circle:{
         position: 'absolute',
-        width:60,
-        height:60,
+        width:'18%',
+        height:'280%',
         left: 20,
         borderRadius:50,
         backgroundColor:'#FFC5BB',
@@ -47,8 +45,8 @@ const styles = StyleSheet.create({
         justifyContent:'center'
     },
     flag:{
-        width: 40,
-        height: 40,
+        width: 38,
+        height: 38,
         borderRadius:50
         
     },

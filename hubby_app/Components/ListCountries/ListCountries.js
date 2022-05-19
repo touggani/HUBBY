@@ -44,7 +44,15 @@ export default function Menu({navigation}) {
                     "country":"Maroc",
                     "countryCode":"ma",
                     "key" : '101092837993'
+                }
+                ,
+                {
+                    "name":"Maroc",
+                    "country":"Maroc",
+                    "countryCode":"ma",
+                    "key" : '1017993'
                 }]
+                
 
     var namesList = List.map(function(element, key){
         

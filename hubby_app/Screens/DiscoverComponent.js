@@ -84,9 +84,6 @@ const styles = StyleSheet.create({
         fontSize: hp('2%')
     },
     gif:{
-        height: hp('40%'),
-        width: wp('40%'),
-        bottom:30,
     },
     description:{
         flex:2,

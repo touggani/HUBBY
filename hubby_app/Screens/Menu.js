@@ -18,7 +18,7 @@ export default function Menu({navigation}) {
       setSearch(search);
     };
 
-    const [active, setActive] = useState(1);
+    const [active, setActive] = useState(2);
     
     
 
@@ -31,24 +31,26 @@ export default function Menu({navigation}) {
                     onChangeText={updateSearch}
                     value={search}
                     inputStyle={{borderColor:'yellow'}}
-                    containerStyle={{backgroundColor:'transparent', width:330, borderBottomColor:'transparent',borderTopColor:'transparent'}}
+                    containerStyle={{backgroundColor:'transparent', width:'90%', borderBottomColor:'transparent',borderTopColor:'transparent'}}
                     inputContainerStyle={{borderRadius:30, backgroundColor:"#E8B7B7", borderWidth:0}}
                     leftIconContainerStyle={{color:'black'}}
                     style={styles.searchbar}
                 />
-                <MaterialCommunityIcons name="filter" size={40} color={"#E8B7B7"} style={{left:0,top:15}}/>
+                <MaterialCommunityIcons onPress={() => {alert("click")}} name="filter" size={40} color={"#E8B7B7"} style={{left:0,top:15}}/>
             </View>
-            <ScrollView style={{paddingBottom:400, flex: 1}}>
-                <View style={styles.topMenu}>
-                    <View style={styles.topMenuComponent}><Text style={[active === 1 ? styles.topMenuComponentPays : null ]} onPress={() => {setActive(1)}}>A-Z</Text></View>
-                    <View style={styles.topMenuComponent}><Text style={[active === 2 ? styles.topMenuComponentAZ : null]} onPress={() => {setActive(2)}}>Pays</Text></View>
-                </View>
-                <View>
-                    <View style={styles.list}> 
-                        {active === 1 ? 
-                            <Text>1</Text> : 
-                            <ListCountries/>}
-                    </View> 
+            <ScrollView style={{height:'1%'}}>
+                <View style={styles.scrollList}>
+                    <View style={styles.topMenu}>
+                        <View style={styles.topMenuComponent}><Text style={[active === 1 ? styles.topMenuComponentAZ : null ]} onPress={() => {setActive(1)}}>A-Z</Text></View>
+                        <View style={styles.topMenuComponent}><Text style={[active === 2 ? styles.topMenuComponentPays : null]} onPress={() => {setActive(2)}}>Pays</Text></View>
+                    </View>
+                    <View style={styles.scrollList}>
+                        <View style={styles.list}> 
+                            {active === 1 ? 
+                                <Text>1</Text> : 
+                                <ListCountries/>}
+                        </View> 
+                    </View>
                 </View>
             </ScrollView>
         </View>
@@ -68,35 +70,40 @@ const styles = StyleSheet.create({
         paddingTop:3,
         paddingBottom:3,
         borderRadius:30,
+        width:'100%'
     },
     topMenuComponent:{
         flex:1,
         alignItems:'center',
-        justifyContent:'center'
+        justifyContent:'center',
         
     },
     topMenuComponentAZ:{
         backgroundColor:'#E8B7B7',
         borderRadius:30,
-        paddingVertical:15,
-        paddingHorizontal:70,
-        borderRadius:25,
+        paddingVertical:10,
+        paddingHorizontal:'40%',
         overflow:"hidden",
+        borderRadius:20,
         
         
     },
     topMenuComponentPays:{
         backgroundColor:'#E8B7B7',
         borderRadius:30,
-        paddingVertical:15,
-        paddingHorizontal:70,
-        borderRadius:25,
+        paddingVertical:10,
+        paddingHorizontal:'40%',
         overflow:"hidden",
+        borderRadius:20,
     },
     list:{
         top:60,
         height:100,
     
+    },
+    scrollList:{
+        paddingBottom:330,
+        flex: 3,
     }
     
 
