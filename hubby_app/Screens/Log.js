@@ -4,7 +4,7 @@ import Btn from '../Components/Btn'
 import FadeInOut from 'react-native-fade-in-out';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { CommonActions } from '@react-navigation/native';
-
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 export default function Log({navigation}) {
@@ -19,7 +19,14 @@ export default function Log({navigation}) {
         
       },[]);
 
-      const toHome = () => {
+      const toHome = async() => {
+        try {
+            await AsyncStorage.setItem('firstOpen', '1')
+            await AsyncStorage.setItem('isConnected', '0')
+            await AsyncStorage.setItem('fridge', '1')
+          } catch (e) {
+            // saving error
+          }
         navigation.dispatch(
             CommonActions.reset({
               index: 1,
@@ -31,6 +38,10 @@ export default function Log({navigation}) {
               ],
             })
           );
+      }
+
+      const storeData = async (value) => {
+        
       }
 
     return (

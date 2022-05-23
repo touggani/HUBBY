@@ -51,6 +51,12 @@ export default function Menu({navigation}) {
                     "country":"Maroc",
                     "countryCode":"ma",
                     "key" : '1017993'
+                },
+                {
+                    "name":"Belgique",
+                    "country":"Belgique",
+                    "countryCode":"be",
+                    "key" : '1017993bebe'
                 }]
                 
 
@@ -61,7 +67,7 @@ export default function Menu({navigation}) {
         return [<Text key={res+key} style={styles.letter}>{res}</Text>,<CountryBtn key={"btn-"+element.key} element={element}/>]
         //return [[<Text key={"text1"+key} style={styles.letter}>{res}</Text>,<Text key={"text2"+key} style={styles.name}>{name.name}</Text>]];
         
-      })
+    })
 
     function DisplayLetter(name, key){
         if(key == 0) return List[key].name.charAt(0)
@@ -81,8 +87,7 @@ const styles = StyleSheet.create({
     letter:{
         fontSize:20,
         fontWeight:"bold",
-        paddingTop:15,
-
+        paddingTop:15
     }
 
 });

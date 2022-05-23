@@ -38,7 +38,7 @@ export default function Menu({navigation}) {
                 />
                 <MaterialCommunityIcons onPress={() => {alert("click")}} name="filter" size={40} color={"#E8B7B7"} style={{left:0,top:15}}/>
             </View>
-            <ScrollView style={{height:'1%'}}>
+            <ScrollView style={{}}>
                 <View style={styles.scrollList}>
                     <View style={styles.topMenu}>
                         <View style={styles.topMenuComponent}><Text style={[active === 1 ? styles.topMenuComponentAZ : null ]} onPress={() => {setActive(1)}}>A-Z</Text></View>
@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
     },
     topMenu:{
         flexDirection:'row',
-        top:30, 
+        top:10, 
         borderWidth:1, 
         borderColor:"#E8B7B7", 
         paddingTop:3,
@@ -97,13 +97,13 @@ const styles = StyleSheet.create({
         borderRadius:20,
     },
     list:{
-        top:60,
+        top:20,
         height:100,
     
     },
     scrollList:{
         paddingBottom:330,
-        flex: 3,
+        top:20
     }
     
 

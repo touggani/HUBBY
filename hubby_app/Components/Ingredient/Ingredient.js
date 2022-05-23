@@ -18,11 +18,11 @@ export default function Ingredient() {
         <View style={styles.container}>
             <Text style={styles.ingredient}>Tomate(s)</Text>
             <View style={styles.compteur}>
-                <Text style={styles.Elemcompteur} onPress={addNb}>-</Text>
+                <Text style={[styles.Elemcompteur, styles.cmpBtn]} onPress={addNb}>-</Text>
                 <Text style={styles.Elemcompteur}>{nb}</Text>
-                <Text style={styles.Elemcompteur} onPress={() => {setnb(nb+1)}}>+</Text>
+                <Text style={[styles.Elemcompteur, styles.cmpBtn]} onPress={() => {setnb(nb+1)}}>+</Text>
             </View>
-            <MaterialCommunityIcons onPress={() => {alert("click")}} name="delete" size={40} color={"#000"} style={{top:15}}/>
+            <MaterialCommunityIcons onPress={() => {alert("click")}} name="delete" size={30} color={"#000"} style={{top:15}}/>
 
         </View>
     );
@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
       flexDirection:'column',
       backgroundColor:'red',
       paddingHorizontal:'3%',
-      paddingVertical:'8%',
+      paddingVertical:'6%',
       borderRadius:25,
       borderWidth:1,
       borderColor:'transparent',
@@ -52,7 +52,14 @@ const styles = StyleSheet.create({
     },
     Elemcompteur:{
         fontSize:19,
-        paddingHorizontal:'6%'
+        paddingHorizontal:'10%'
+    },
+    cmpBtn:{
+        backgroundColor:'white',
+        borderRadius:20/2,
+        borderWidth:1,
+        borderColor:'transparent',
+        overflow:'hidden'
     }
 
 });
