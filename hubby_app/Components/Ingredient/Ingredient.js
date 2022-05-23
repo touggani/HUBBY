@@ -4,19 +4,19 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 
-export default function Ingredient() {
+export default function Ingredient(props) {
    
     const insets = useSafeAreaInsets();
 
-    const [nb, setnb] = useState(1);
+    const [nb, setnb] = useState(props.value.quantite);
     
     const addNb = () => {
         if(nb > 1){ setnb(nb-1 )}
     } 
 
     return (
-        <View style={styles.container}>
-            <Text style={styles.ingredient}>Tomate(s)</Text>
+        <View style={styles.container} key={props.value.key}>
+            <Text style={styles.ingredient}>{props.value.produit}</Text>
             <View style={styles.compteur}>
                 <Text style={[styles.Elemcompteur, styles.cmpBtn]} onPress={addNb}>-</Text>
                 <Text style={styles.Elemcompteur}>{nb}</Text>

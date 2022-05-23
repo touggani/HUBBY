@@ -5,6 +5,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { SearchBar } from 'react-native-elements';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import uuid from 'react-native-uuid';
 
 import Ingredient from '../Components/Ingredient/Ingredient';
 
@@ -16,44 +17,61 @@ export default function Fridge({navigation}) {
       setSearch(search);
     };
 
-    const [fridge, setFridge] = useState(); 
+    const [fridge, setFridge] = useState([]); 
 
-    useEffect(() => {
-
-        const addToState = async () => {
-           const storage = await AsyncStorage.getItem('fridge')
-            //setFridge(oldArray => [...oldArray, newElement]);
-            //console.log(storage) 
-            //console.log(JSON.parse(storage)) 
+    const getData = async () => {
+        try {
+          var jsonValue = await AsyncStorage.getItem('fridge')
+          jsonValue = jsonValue + ']'
+          console.log(JSON.parse(jsonValue))
+          return JSON.parse(jsonValue);
+        } catch(e) {
+            console.log(jsonValue)
+          return null
         }
-        addToState()
+    }
+
+    const addToState = async () => {
+        const res = await getData()
+        console.log(res)
+        console.log(res[Object.keys(res).length-1].quantite)
+        setFridge(prevState => [...prevState, {key: res[Object.keys(res).length-1].key,produit: res[Object.keys(res).length-1].produit, quantite: res[Object.keys(res).length-1].quantite}]);
+    }
+
+    const removeKey = (key) => {
+        //delete for state
+        var list;
+        for(var i = 0; i<fridge.length; i++){
+            if(fridge[i].key != key){
+                list = list + fridge[i]
+                console.log(fridge[i])
+            }
+            
+        }
+        setFridge(list)
+        console.log("last:"+ fridge)
         
-        
-      },[]);
-
-    const pro = {
-        produit: "tomate",
-        quantité: 3
-    }
-
-
-    const addProductIntoStorage = async () => {
-        var fridge = await AsyncStorage.getItem('fridge');
-        if(await AsyncStorage.getItem('fridge') == null){ await AsyncStorage.setItem('fridge', fridge = "["+JSON.stringify(pro));}
-        else{ await AsyncStorage.setItem('fridge', fridge += JSON.stringify(pro));}
-        //console.log(JSON.parse(await AsyncStorage.getItem('fridge'))) 
-        console.log(await AsyncStorage.getItem('fridge'))
-    }
-
-    const deleteProductIntoStorage = async () => {
-        await AsyncStorage.removeItem('fridge')
-        console.log(await AsyncStorage.getItem('fridge'))
-    }
+    };
     
+
+    const remove = async () => {await AsyncStorage.removeItem('fridge'); console.log("done remove"); setFridge([])}
+    const add = async () => {
+        const data = {"key": uuid.v4(),"produit": "orange", "quantite":3}
+        var fridge = await AsyncStorage.getItem('fridge'); 
+        if( fridge == null ) { await AsyncStorage.setItem('fridge', fridge = '['+JSON.stringify(data)); }
+        else { await AsyncStorage.setItem('fridge', fridge += ','+JSON.stringify(data)); }
+        console.log("done add")
+        addToState()
+    }
+
+    const t = async () => { removeKey("db3ffbc5-a6d7-48c6-a931-28480dc17cc2") }
 
     return (
         <View style={[styles.container, {paddingTop: insets.top}]}>
-            <Text onPress={deleteProductIntoStorage}>remove</Text>
+            <Text onPress={t}>remove</Text>
+            <Text onPress={remove}>remove All</Text>
+            <Text onPress={add}>add</Text>
+            <Text onPress={getData}>getData</Text>
             <View style={styles.block1}><Text style={styles.title}>Qu'ai je dans mon frigo ?</Text>
             <SearchBar
                 placeholder="Rechercher"
@@ -66,17 +84,19 @@ export default function Fridge({navigation}) {
                 leftIconContainerStyle={{color:'black'}}
                 style={styles.searchbar}
             /></View>
+            
            <ScrollView style={{top:10, height:'40%',width:'100%'}}><View style={styles.block2}>
-                
-                    <Ingredient/>
-                    <Ingredient/>
-                    <Ingredient/>
+                    { fridge.map((value, index) => (
+                            <Ingredient value={value}/>
+                    ))}
+                    
 
                 
             </View></ScrollView>
-            <TouchableOpacity activeOpacity={0.8} style={styles.btn} onPress={addProductIntoStorage}>
+            <TouchableOpacity activeOpacity={0.8} style={styles.btn} >
                 <Icon name="plus" size={50} color="#FFC5BB"/>
             </TouchableOpacity>
+            
         </View>
     );
 }
@@ -124,3 +144,53 @@ const styles = StyleSheet.create({
     }
 
 });
+
+
+/*const [fridge, setFridge] = useState([{}]); 
+
+    useEffect(() => {
+
+        const addToState = async () => {
+           const storage = await AsyncStorage.getItem('fridge')
+            //setFridge(oldArray => [...oldArray, newElement]);
+            //console.log(storage) 
+            //console.log(JSON.parse(storage)) 
+        }
+        addToState()
+        
+        
+      },[]);
+
+    const pro = {
+        produit: "tomate",
+        quantite: 3
+    }
+
+
+    const addProductIntoStorage = async () => {
+        var fridge = await AsyncStorage.getItem('fridge');
+        if(await AsyncStorage.getItem('fridge') == null){ await AsyncStorage.setItem('fridge', fridge = "["+JSON.stringify(pro));}
+        else{
+            await AsyncStorage.setItem('fridge', fridge += ','+JSON.stringify(pro));}
+        var res = await AsyncStorage.getItem('fridge')
+        res = res + "]"
+        var resparse = JSON.parse(res)
+        console.log("last element: "+ resparse[resparse.length-1].produit)
+        setFridge((prevFridge) => [
+            ...prevFridge,
+            {
+                "produit": resparse[resparse.length-1].produit,
+                //"quantite": resparse[resparse.length-1].quantite
+            },
+        ]);
+        console.log(resparse)
+        //setFridge(resparse[resparse.length-1])
+        for(var i = 0; i<resparse.length;i++){
+            setFridge((prevFridge) => [...prevFridge, {"produit" : resparse[i].produit, "quantite" : resparse[i].quantite}])
+        }
+    }
+
+    const deleteProductIntoStorage = async () => {
+        await AsyncStorage.removeItem('fridge')
+        console.log(await AsyncStorage.getItem('fridge'))
+    }*/
