@@ -26,8 +26,8 @@ export default function Fridge({navigation}) {
           console.log(JSON.parse(jsonValue))
           return JSON.parse(jsonValue);
         } catch(e) {
-            console.log(jsonValue)
-          return null
+            //console.log(jsonValue)
+          return JSON.parse("[]")
         }
     }
 
@@ -40,16 +40,20 @@ export default function Fridge({navigation}) {
 
     const removeKey = (key) => {
         //delete for state
-        var list;
+        var list = [];
+        list = "["
+        console.log(list.length)
         for(var i = 0; i<fridge.length; i++){
             if(fridge[i].key != key){
-                list = list + fridge[i]
-                console.log(fridge[i])
+                if(list.length == 1){list = list + fridge[i]}
+                else{list = list + ","+fridge[i]}
+                //console.log(fridge[i])
             }
             
         }
-        setFridge(list)
-        console.log("last:"+ fridge)
+        list = list + ']'
+        //setFridge(list)
+        console.log("last:"+ JSON.parse(list)[0] )
         
     };
     
@@ -86,9 +90,10 @@ export default function Fridge({navigation}) {
             /></View>
             
            <ScrollView style={{top:10, height:'40%',width:'100%'}}><View style={styles.block2}>
-                    { fridge.map((value, index) => (
-                            <Ingredient value={value}/>
-                    ))}
+                    { fridge.length != 0 ?
+                    fridge.map((value, index) => (
+                            <Ingredient value={value} key={value.key}/>
+                    )) : null }
                     
 
                 
