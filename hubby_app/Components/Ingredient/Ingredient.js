@@ -4,25 +4,25 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 
-export default function Ingredient(props) {
+export default function Ingredient({value, removeKey}) {
    
     const insets = useSafeAreaInsets();
 
-    const [nb, setnb] = useState(props.value.quantite);
+    const [nb, setnb] = useState(value.quantite);
     
     const addNb = () => {
         if(nb > 1){ setnb(nb-1 )}
     } 
 
     return (
-        <View style={styles.container} key={props.value.key}>
-            <Text style={styles.ingredient}>{props.value.produit}</Text>
+        <View style={styles.container} key={value.key}>
+            <Text style={styles.ingredient}>{value.produit}</Text>
             <View style={styles.compteur}>
                 <Text style={[styles.Elemcompteur, styles.cmpBtn]} onPress={addNb}>-</Text>
                 <Text style={styles.Elemcompteur}>{nb}</Text>
                 <Text style={[styles.Elemcompteur, styles.cmpBtn]} onPress={() => {setnb(nb+1)}}>+</Text>
             </View>
-            <MaterialCommunityIcons onPress={() => {alert("click")}} name="delete" size={30} color={"#000"} style={{top:15}}/>
+            <MaterialCommunityIcons onPress={() => {removeKey(value.key)}} name="delete" size={30} color={"#000"} style={{top:15}}/>
 
         </View>
     );

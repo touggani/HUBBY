@@ -13,9 +13,16 @@ export default function Fridge({navigation}) {
    
     const insets = useSafeAreaInsets();
     const [search, setSearch] = useState("");
-    const updateSearch = (search) => {
-      setSearch(search);
-    };
+    const updateSearch = (search) => { setSearch(search); };
+
+    useEffect(() => {
+        const initFridge = async () => {
+            var fridge = await AsyncStorage.getItem('fridge'); 
+            console.log()
+            setFridge(JSON.parse(fridge+']'))
+        }
+        initFridge()
+    },[]);
 
     const [fridge, setFridge] = useState([]); 
 
@@ -38,29 +45,28 @@ export default function Fridge({navigation}) {
         setFridge(prevState => [...prevState, {key: res[Object.keys(res).length-1].key,produit: res[Object.keys(res).length-1].produit, quantite: res[Object.keys(res).length-1].quantite}]);
     }
 
-    const removeKey = (key) => {
+    const removeKey = async (key) => {
         //delete for state
         var list = [];
-        list = "["
         console.log(list.length)
         for(var i = 0; i<fridge.length; i++){
             if(fridge[i].key != key){
-                if(list.length == 1){list = list + fridge[i]}
-                else{list = list + ","+fridge[i]}
-                //console.log(fridge[i])
-            }
-            
+                list.push(fridge[i])
+            }   
         }
-        list = list + ']'
-        //setFridge(list)
-        console.log("last:"+ JSON.parse(list)[0] )
+        setFridge(list)
+        await AsyncStorage.setItem('fridge', fridge = JSON.stringify(list));
+        console.log("key delete:"+ key )
         
     };
     
 
     const remove = async () => {await AsyncStorage.removeItem('fridge'); console.log("done remove"); setFridge([])}
+    
+    
+    var data = {"key": uuid.v4(),"produit": "orange", "quantite":3}
+    
     const add = async () => {
-        const data = {"key": uuid.v4(),"produit": "orange", "quantite":3}
         var fridge = await AsyncStorage.getItem('fridge'); 
         if( fridge == null ) { await AsyncStorage.setItem('fridge', fridge = '['+JSON.stringify(data)); }
         else { await AsyncStorage.setItem('fridge', fridge += ','+JSON.stringify(data)); }
@@ -68,7 +74,7 @@ export default function Fridge({navigation}) {
         addToState()
     }
 
-    const t = async () => { removeKey("db3ffbc5-a6d7-48c6-a931-28480dc17cc2") }
+    const t = async () => { removeKey("b093fe6f-fbde-47c8-8bd6-aa678ed6d175") }
 
     return (
         <View style={[styles.container, {paddingTop: insets.top}]}>
@@ -92,7 +98,7 @@ export default function Fridge({navigation}) {
            <ScrollView style={{top:10, height:'40%',width:'100%'}}><View style={styles.block2}>
                     { fridge.length != 0 ?
                     fridge.map((value, index) => (
-                            <Ingredient value={value} key={value.key}/>
+                            <Ingredient value={value} key={value.key} removeKey={removeKey} />
                     )) : null }
                     
 
