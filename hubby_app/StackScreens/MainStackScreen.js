@@ -77,7 +77,7 @@ import AccountStackScreen from './AccountStackScreen';
                 ),
                 tabBarShowLabel:false,
           }}/>
-          { connect != 0 ? 
+           
           <Tab.Screen 
             name="AccountStack" 
             component={AccountStackScreen}
@@ -87,9 +87,7 @@ import AccountStackScreen from './AccountStackScreen';
                   <MaterialCommunityIcons name="account" color={color} size={iconSize} style={{marginBottom:15}}/>
                 ),
                 tabBarShowLabel:false,
-          }}/>:
-          null
-          }
+          }}/>
               
        </Tab.Navigator>
    );

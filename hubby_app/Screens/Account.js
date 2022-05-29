@@ -25,7 +25,7 @@ export default function Random({navigation}) {
               index: 1,
               routes: [
                 {
-                  name: 'MainStack',
+                  name: 'Log',
                   params: { user: 'jane' },
                 },
               ],
@@ -33,17 +33,6 @@ export default function Random({navigation}) {
           );
       }
 
-    navigation.dispatch(
-            CommonActions.reset({
-              index: 1,
-              routes: [
-                {
-                  name: 'MainStack',
-                  params: { user: 'jane' },
-                },
-              ],
-            })
-          );
     
     if(isConnected === '1'){
         return (
@@ -51,7 +40,9 @@ export default function Random({navigation}) {
                 <View style={styles.userNameblock}><Text style={styles.userName}>NOM_UTILISATEUR</Text></View>
                 <View style={styles.userPicblock}><Image style={styles.userProfil} source={pp} /></View>
                 <View style={styles.block}>
-                    <TouchableOpacity activeOpacity={0.8} style={styles.btn} onPress={toLog()}>
+                    <TouchableOpacity activeOpacity={0.8} style={styles.btn} onPress={() =>
+        navigation.navigate('NoStack', {screen: 'Log'})
+      }>
                         <Text>Editer mon profil</Text>
                     </TouchableOpacity></View>
             </View>

@@ -4,6 +4,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import RBSheet from "react-native-raw-bottom-sheet";
+import RandomModal from '../Components/RadomModal/RandomModal';
 
 export default function Random({navigation}) {
    
@@ -31,12 +32,8 @@ export default function Random({navigation}) {
                     container: {
                     alignItems: "center"
                     }
-                }}
-                >
-                    <Text>Mes preferences de recherche</Text>
-                    <ScrollView>
-                        <Text>Mes preferences de recherche</Text>
-                    </ScrollView>
+                }}>
+                    <RandomModal/>
                 </RBSheet>
             </View>
         </View>
