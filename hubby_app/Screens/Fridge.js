@@ -17,9 +17,9 @@ export default function Fridge({navigation}) {
 
     useEffect(() => {
         const initFridge = async () => {
-            var fridge = await AsyncStorage.getItem('fridge'); 
-            console.log()
-            setFridge(JSON.parse(fridge+']'))
+            var res = await getData()
+            console.log('ici '+ res)
+            setFridge(res)
         }
         initFridge()
     },[]);
@@ -30,18 +30,15 @@ export default function Fridge({navigation}) {
         try {
           var jsonValue = await AsyncStorage.getItem('fridge')
           jsonValue = jsonValue + ']'
-          console.log(JSON.parse(jsonValue))
           return JSON.parse(jsonValue);
         } catch(e) {
             //console.log(jsonValue)
-          return JSON.parse("[]")
+            return JSON.parse("[]")
         }
     }
 
     const addToState = async () => {
         const res = await getData()
-        console.log(res)
-        console.log(res[Object.keys(res).length-1].quantite)
         setFridge(prevState => [...prevState, {key: res[Object.keys(res).length-1].key,produit: res[Object.keys(res).length-1].produit, quantite: res[Object.keys(res).length-1].quantite}]);
     }
 
@@ -55,7 +52,9 @@ export default function Fridge({navigation}) {
             }   
         }
         setFridge(list)
-        await AsyncStorage.setItem('fridge', fridge = JSON.stringify(list));
+        console.log("list "+JSON.stringify(list))
+        await AsyncStorage.removeItem('fridge')
+        await AsyncStorage.setItem('fridge', JSON.stringify(list));
         console.log("key delete:"+ key )
         
     };
