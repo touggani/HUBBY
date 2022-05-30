@@ -18,7 +18,7 @@ export default function App() {
         try {
           const value = await AsyncStorage.getItem('firstOpen')
           if(value !== null) {
-              if(value === '1'){ setfirstOpen(true)}
+              if(value === '1'){ setfirstOpen(false)}
               else{setfirstOpen(false)}
             
           }

@@ -40,9 +40,14 @@ export default function Log({navigation}) {
           );
       }
 
-      const storeData = async (value) => {
-        
-      }
+
+    function toConnect(){
+      navigation.push('Connect');
+    }
+
+    function toCreateAccount(){
+      navigation.push('CreateAccount');
+    }
 
     return (
         
@@ -51,8 +56,8 @@ export default function Log({navigation}) {
             <View style={{flex: 5, alignItems:'center',top:70}}>
                 <Text style={styles.txt1}>Bienvenue sur HUBBY</Text>
                 <Text style={styles.txt2}>Prêt à découvrir des milliers de recettes autour du monde</Text>
-                <Btn color={'white'} text={"S'inscrire"}/>
-                <Text style={styles.txt3}>J'ai déjà un compte ?</Text>
+                <Btn color={'white'} text={"S'inscrire"} action={toCreateAccount}/>
+                <Text style={styles.txt3} onPress={toConnect}>J'ai déjà un compte ?</Text>
             </View>
             
             <Text style={styles.txt4} onPress={toHome}>Acceder directement à l'application</Text>

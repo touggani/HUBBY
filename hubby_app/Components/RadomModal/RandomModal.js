@@ -17,8 +17,8 @@ export default function RandomModal({navigation}) {
         const initParam = async() => {
             try{
                 var param = await AsyncStorage.getItem('parameters_vegetarien')
-                if(param != null){setIsEnabled(param)}
-                            }
+                if(param === "true"){setIsEnabled(true)}
+            }
             catch(e){
                 console.log(e)
             }
@@ -31,12 +31,10 @@ export default function RandomModal({navigation}) {
         const changeState = async() => {
             try{
                 await AsyncStorage.setItem('parameters_vegetarien', JSON.stringify(isEnabled))
-                console.log('change '+JSON.stringify(isEnabled))
             }
             catch(e){
                 console.log(e)
             }
-            
         }
         changeState()
     },[isEnabled]);

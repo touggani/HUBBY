@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
    btn:{
        alignItems:'center',
        justifyContent:'center',
-       width:320,
+       width:280,
        height:50,
        backgroundColor:'#F8F0E1',
        borderRadius:30,

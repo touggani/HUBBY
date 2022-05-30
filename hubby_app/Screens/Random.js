@@ -10,7 +10,7 @@ export default function Random({navigation}) {
    
     const insets = useSafeAreaInsets();
     const refRBSheet = useRef();
-    
+
 
     return (
         <View style={[styles.container, {paddingTop: insets.top}]}>

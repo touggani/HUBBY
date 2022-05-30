@@ -10,7 +10,7 @@ import { CommonActions } from '@react-navigation/native';
 
 import pp from "../Illustrations/pp.jpg"
 
-export default function Random({navigation}) {
+export default function Account({navigation}) {
    
     const insets = useSafeAreaInsets();
     const refRBSheet = useRef();
@@ -20,7 +20,7 @@ export default function Random({navigation}) {
     }
 
     const toLog = async() => {
-        navigation.dispatch(
+        /*navigation.dispatch(
             CommonActions.reset({
               index: 1,
               routes: [
@@ -30,7 +30,11 @@ export default function Random({navigation}) {
                 },
               ],
             })
-          );
+          );*/
+          navigation.reset({
+            index: 0,
+            routes: [{ name: 'Log' }],
+          });
       }
 
     
@@ -40,9 +44,7 @@ export default function Random({navigation}) {
                 <View style={styles.userNameblock}><Text style={styles.userName}>NOM_UTILISATEUR</Text></View>
                 <View style={styles.userPicblock}><Image style={styles.userProfil} source={pp} /></View>
                 <View style={styles.block}>
-                    <TouchableOpacity activeOpacity={0.8} style={styles.btn} onPress={() =>
-        navigation.navigate('NoStack', {screen: 'Log'})
-      }>
+                    <TouchableOpacity activeOpacity={0.8} style={styles.btn}>
                         <Text>Editer mon profil</Text>
                     </TouchableOpacity></View>
             </View>
@@ -53,8 +55,8 @@ export default function Random({navigation}) {
             <View style={[styles.container, {paddingTop: insets.top}]}>
                 <View style={{flex:1, alignItems:'center', justifyContent:'center'}}>
                     <Text style={{fontSize:20}}>Vous n'etes pas connecté !</Text>
-                    <TouchableOpacity activeOpacity={0.8} style={styles.btnToConnection}>
-                            <Text style={{fontSize:17,color:"black" }}>Se connecter</Text>
+                    <TouchableOpacity activeOpacity={0.8} style={styles.btnToConnection} onPress={() => toLog()}>
+                            <Text style={{fontSize:17,color:"black" }} >Se connecter</Text>
                     </TouchableOpacity>
                 </View>
             </View>
