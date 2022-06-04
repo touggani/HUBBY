@@ -1,0 +1,14 @@
+from django.db import models
+from django.contrib.auth.models import AbstractBaseUser
+
+#Create your models here.
+class User(AbstractBaseUser):
+    email = models.EmailField(unique=True)
+    nom = models.TextField()
+    prenom = models.TextField()
+    nom_utilisateur = models.TextField()
+    premium = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.email
+
