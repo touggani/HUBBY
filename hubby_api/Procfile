@@ -1,4 +1,4 @@
-web: gunicorn Hubby_api.wsgi
+web: gunicorn Hubby_api.wsgi:application --log-file - --log-level debug
 release: python manage.py makemigrations --noinput
 release: python manage.py collectstatic --noinput
 release: python manage.py migrate --noinput
