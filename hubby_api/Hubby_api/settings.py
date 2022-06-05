@@ -31,7 +31,7 @@ SECRET_KEY = config('SECRET_KEY')
 # SECRET_KEY = "django-insecure-8@-_2mkox^nmk0f3alw9zv_xw%-qd*9cfj#qp#+c9sa4-#+a87"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = config('DEBUG')
 
 ALLOWED_HOSTS = ['.herokuapp.com']
 
@@ -95,11 +95,11 @@ WSGI_APPLICATION = 'Hubby_api.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'Hubby',
-        'USER': 'postgres',
-        'PASSWORD': 'root',
-        'HOST': 'localhost'
+        'ENGINE': config('ENGINE'),
+        'NAME': config('NAME'),
+        'USER': config('USER'),
+        'PASSWORD': config('PASSWORD'),
+        'HOST': config('HOST')
     }
 }
 
