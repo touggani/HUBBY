@@ -31,10 +31,11 @@ export default function Account({navigation}) {
               ],
             })
           );*/
-          navigation.reset({
-            index: 0,
-            routes: [{ name: 'Log' }],
-          });
+        //   navigation.reset({
+        //     index: 0,
+        //     routes: [{ name: 'Log' }],
+        //   });
+        navigation.navigate('Log')
       }
 
     

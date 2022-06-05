@@ -3,7 +3,9 @@ import {StyleSheet, View, Text, TouchableOpacity, ImageBackground} from 'react-n
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 
-export default function DishPreview({navigation}) {
+export default function DishPreview({navigation, recette}) {
+
+    const temps = recette.duree*100+" min"
 
     return (
             <TouchableOpacity activeOpacity={0.8} style={styles.container}>
@@ -12,12 +14,11 @@ export default function DishPreview({navigation}) {
                     source={require("../../Illustrations/burger.png")}>
                     
                 <View style={styles.time}>
-                    <Text style={styles.timeText}>10 - 15 min</Text>
+                    <Text style={styles.timeText}>{temps}</Text>
                 </View>
                 </ImageBackground>
                 <View style={{flexDirection: 'row', justifyContent: 'flex-end'}}>
-                    <Text style={{flex:2, left:"300%", fontSize:17}}>Burger</Text>
-                    <Text style={{right:"300%",fontSize:17}}><MaterialCommunityIcons name="home" size={17} /> International</Text>
+                    <Text style={{flex:2, left:"300%", fontSize:17}}>{recette.nom}</Text>
                 </View>
             </TouchableOpacity>
             

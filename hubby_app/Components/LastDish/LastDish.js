@@ -2,17 +2,17 @@ import React, {} from 'react';
 import {StyleSheet, View, Text, ScrollView} from 'react-native';
 import DishPreview from './DishPreview'
 
-export default function LastDish({navigation}) {
+export default function LastDish({navigation, recettes}) {
 
     return (
         <View style={styles.container}>
             <Text style={styles.title}>Dernières recettes</Text>
             <Text style={styles.title}>consultées</Text>
-
-            <DishPreview/>
-            <DishPreview/>
-            <DishPreview/>
-            <DishPreview/>
+            {recettes && recettes.map((value, index) => (
+                        <DishPreview recette={value} key={index}/>
+                    ))}
+            
+            
         </View>
     );
 }

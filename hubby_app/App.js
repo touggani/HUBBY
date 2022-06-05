@@ -12,38 +12,16 @@ const Stack = createNativeStackNavigator();
 
 export default function App() {
 
-    const [firstOpen, setfirstOpen] = useState()
-        
-    const getData = async () => {
-        try {
-          const value = await AsyncStorage.getItem('firstOpen')
-          if(value !== null) {
-              if(value === '1'){ setfirstOpen(false)}
-              else{setfirstOpen(false)}
-            
-          }
-        } catch(e) {
-          console.log(e)
-        }
-      }
-
-      useEffect(() => {
-        getData()
-        
-      },[]);
-
     return (
       
           <NavigationContainer>
               <Stack.Navigator screenOptions={{headerShown: false}}>
-                  {
-                      firstOpen ?
-                          <Stack.Screen name="Main" component={MainStackScreen}/>
-                          //<Stack.Screen name="Main" component={NoStack}/>
-                          :
-                          <Stack.Screen name="Main" component={NoStack}/>
-                          //<Stack.Screen name="Main" component={MainStackScreen}/>
-                  }
+                  
+                <Stack.Screen name="MainNoStack" component={NoStack}/>
+                <Stack.Screen name="Main" component={MainStackScreen}/>
+                          
+                          
+                  
               </Stack.Navigator>
           </NavigationContainer>
     );
