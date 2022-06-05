@@ -2,6 +2,8 @@ from dataclasses import field
 from . import models
 from rest_framework import serializers
 
+import hubby
+
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
