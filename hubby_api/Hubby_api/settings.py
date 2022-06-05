@@ -17,6 +17,7 @@ from pathlib import Path
 import os
 from decouple import config
 from dj_database_url import parse
+from logging.handlers import SysLogHandler
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -153,5 +154,54 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'filters': {
+        'require_debug_false': {
+            '()': 'django.utils.log.RequireDebugFalse'
+        }
+    },
+    'formatters': {
+        'verbose': {
+            'format': '[contactor] %(levelname)s %(asctime)s %(message)s'
+        },
+    },
+    'handlers': {
+        # Send all messages to console
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+        },
+        # Send info messages to syslog
+        'syslog': {
+            'level': 'INFO',
+            'class': 'logging.handlers.SysLogHandler',
+            'facility': SysLogHandler.LOG_LOCAL2,
+            'address': '/dev/log',
+            'formatter': 'verbose',
+        },
+        # Warning messages are sent to admin emails
+        'mail_admins': {
+            'level': 'WARNING',
+            'filters': ['require_debug_false'],
+            'class': 'django.utils.log.AdminEmailHandler',
+        },
+        # critical errors are logged to sentry
+        'sentry': {
+            'level': 'ERROR',
+            'filters': ['require_debug_false'],
+            'class': 'raven.contrib.django.handlers.SentryHandler',
+        },
+    },
+    'loggers': {
+        # This is the "catch all" logger
+        '': {
+            'handlers': ['console', 'syslog', 'mail_admins', 'sentry'],
+            'level': 'DEBUG',
+            'propagate': False,
+        },
+    }
+}
 
 django_heroku.settings(locals())
