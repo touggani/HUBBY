@@ -54,13 +54,24 @@ class ConnexionViewSet(viewsets.ViewSet):
 
         response = Response()
         response.data = {
+            'id': user.id,
             'jwt': token
         }
 
         return response
 
 
-class UserViewSet(viewsets.ViewSet):
+class RandomViewSet(viewsets.ViewSet):
+    def list(self, request):
+        recette = models.Recette.objects.order_by('?').first()
+        serializer = serializers.RecetteSerializer(recette)
+        return Response(serializer.data)
+
+
+class UserViewSet(viewsets.ModelViewSet):
+
+    queryset = models.User.objects.all()
+    serializer_class = serializers.UserSerializer
 
     def list(self, request):
         #token = str(request.headers.get('Authorization'))

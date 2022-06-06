@@ -8,6 +8,9 @@ https://docs.djangoproject.com/en/4.0/topics/settings/
 
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
+
+TO RUN THE PROJECT LOCALLY
+python3 manage.py runserver --settings Hubby_api.settings_local
 """
 
 from threading import local
@@ -30,7 +33,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-8@-_2mkox^nmk0f3alw9zv_xw%-qd*9cfj#qp#+c9sa4-#+a87"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 

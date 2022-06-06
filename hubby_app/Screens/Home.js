@@ -20,24 +20,20 @@ export default function Home({navigation}) {
             const response = await fetch('https://gentle-oasis-78916.herokuapp.com/recettes/');
             const jsonresponse = await response.json();
             setRecettes(jsonresponse)
+            try {
+                console.log("token "+await AsyncStorage.getItem('api_token'))
+                console.log("connect "+await AsyncStorage.getItem('isConnected'))
+                console.log("email "+await AsyncStorage.getItem('email'))
+              } catch (e) {
+                // saving error
+              }
         }
         getAllRecettes()
-        console.log(recettes)
     },[]);
 
-    const remove  = async () => {
-        try {
-            await AsyncStorage.removeItem('fridge')
-          } catch(e) {
-            // remove error
-          }
-        
-          console.log('Done.')
-    }
             
     return (
         <View style={[styles.container, {paddingTop: insets.top}]}>
-            <Text onPress={remove}>Remove </Text>
             <ScrollView style={{paddingBottom:30, flex:1}}>
                 <FavorisCountry/>
                 <LastDish recettes={recettes}/>

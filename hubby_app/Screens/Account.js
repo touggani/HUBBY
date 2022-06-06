@@ -1,4 +1,4 @@
-import React, {useEffect, useRef} from 'react';
+import React, {useEffect, useState, useRef} from 'react';
 import {StyleSheet, View, Text, ScrollView, TouchableOpacity, Image} from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -14,32 +14,36 @@ export default function Account({navigation}) {
    
     const insets = useSafeAreaInsets();
     const refRBSheet = useRef();
+    const [connect, setConnect] = useState(null);
 
-    const isConnected = async() => {
-        return await AsyncStorage.getItem('isConnected');
-    }
+
+    useEffect(() => {
+        const isConnected = async() => {
+            try {
+                setConnect(await AsyncStorage.getItem('isConnected'))
+              } catch (e) {
+                console.log(e)
+              }
+        }
+        isConnected()
+    },[]);
+    
 
     const toLog = async() => {
-        /*navigation.dispatch(
-            CommonActions.reset({
-              index: 1,
-              routes: [
-                {
-                  name: 'Log',
-                  params: { user: 'jane' },
-                },
-              ],
-            })
-          );*/
-        //   navigation.reset({
-        //     index: 0,
-        //     routes: [{ name: 'Log' }],
-        //   });
         navigation.navigate('Log')
       }
+    
+    const deconnexion = async() => {
+        try {
+            await AsyncStorage.setItem('isConnected', '0')
+            setConnect(await AsyncStorage.getItem('isConnected'))
+          } catch (e) {
+            console.log(e)
+          }
+    }
 
     
-    if(isConnected === '1'){
+    if(connect == '1'){
         return (
             <View style={[styles.container, {paddingTop: insets.top}]}>
                 <View style={styles.userNameblock}><Text style={styles.userName}>NOM_UTILISATEUR</Text></View>
@@ -47,7 +51,12 @@ export default function Account({navigation}) {
                 <View style={styles.block}>
                     <TouchableOpacity activeOpacity={0.8} style={styles.btn}>
                         <Text>Editer mon profil</Text>
-                    </TouchableOpacity></View>
+                    </TouchableOpacity>
+                    <TouchableOpacity activeOpacity={0.8} style={[styles.btn, {top:30}]} onPress={deconnexion}>
+                        <Text>Se deconnecter</Text>
+                    </TouchableOpacity>
+                </View>
+                    
             </View>
         );
     }
