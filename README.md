@@ -99,6 +99,7 @@ The logos were made by me using GIMP. You can view them in the &quot;Illustratio
 ## **App built with :**
 
 ### React native
+<img src="/project_managment/Illustration/md-pics/react-native.png" width="200" />
 
 React Native is a Framework developed in 2015 by Facebook to develop mobile applications for Android and IOS and all on a single code base.
 
@@ -111,6 +112,7 @@ It is interesting to use React Native in my case since it is a technology on whi
 Finally, the React Native allows and adapts very well to the rest of the technologies that we want to use in the development of this application.
 
 ### Django
+  <img src="/project_managment/Illustration/md-pics/django.png" width="150" /> 
 
 Django is an open-source python framework for building front-end and backend applications. Django is a quick framework to set up on an application. This framework also offers many features allowing the creation of APIs as we will need in this project since we will be working on the creation of a mobile application.
 
@@ -124,6 +126,7 @@ Advantages of using Django:
 
 ### MySQL
 
+  <img src="/project_managment/Illustration/md-pics/mysql.png" width="200" />
 MySQL is a relational database management system. It will store the data used on the application. We will store data such as recipes, recipe details, users etc. Django will use MySQL to access, save or delete data.
 
 Advantages of using MySQL:
@@ -137,6 +140,13 @@ Advantages of using MySQL:
 - Heroku
 - Adobe XD
 - GIMP
+<img src="/project_managment/Illustration/md-pics/GitHub.png" width="200" />
+<img src="/project_managment/Illustration/md-pics/docker.png" width="200" />
+<img src="/project_managment/Illustration/md-pics/Adobe_XD.png" width="200" />
+<img src="/project_managment/Illustration/md-pics/gimp.png" width="200" />
+<img src="/project_managment/Illustration/md-pics/Netlify.png" width="200" />
+<img src="/project_managment/Illustration/md-pics/Heroku_logo.png" width="200" />
+<img src="/project_managment/Illustration/md-pics/circleci.png" width="200" />
 
 ## Database schema
 
