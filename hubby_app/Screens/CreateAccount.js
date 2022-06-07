@@ -21,13 +21,13 @@ export default function CreateAccount({navigation}) {
 
     const Connection  = async () => {
         //await fetch(api_link+'recettes/').then(response => {console.log(response)});
-        const response = await fetch('https://gentle-oasis-78916.herokuapp.com/connexion/', {
+        const response = await fetch('https://gentle-oasis-78916.herokuapp.com/inscription/', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({"email":id, "password":pw})
+            body: JSON.stringify({"email":email, "password":pw, "nom":nom, "prenom":prenom, "nom_utilisateur":id,})
         },
         );
         if(response.status == 200){
@@ -52,15 +52,17 @@ export default function CreateAccount({navigation}) {
         }
 
 
-    const Component1 = () => {
-        return (
+
+    return (
+        <View style={[styles.container, {paddingTop: insets.top, paddingBottom: insets.bottom}]}>
+            <Image source={require('../Illustrations/logosidetoside.png')} style={styles.logo} />
             <View style={{alignItems:'center', flex:1, width:"100%"}}>
                 
                 <View style={{alignItems:'center', flex:2,justifyContent:'center'}}>
                     <Image source={require('../Illustrations/chef.png')} style={styles.gif} />
                     <Text style={styles.txt1}>Bienvenue !</Text>
                 </View>
-                <View style={{width:'100%', alignItems:'center', flex:3,top:'5%'}}>
+                <View style={{width:'100%', alignItems:'center', flex:3,top:'5%', zIndex: 10}}>
                 <TextInput
                     style={styles.input}
                     onChangeText={setNom}
@@ -79,6 +81,7 @@ export default function CreateAccount({navigation}) {
                     value={email}
                     placeholder="Adresse mail"
                     keyboardType="email-address"
+                    autoCapitalize='none'
                 />
                 <TextInput
                     style={styles.input}
@@ -95,20 +98,13 @@ export default function CreateAccount({navigation}) {
                 />
             </View>
                 {error && <Text style={{top:"21%", fontWeight:"bold"}}>{error}</Text>}
-                <View style={{width:'100%', alignItems:'center', flex:3,top:'5%', top:40}}>
+                <View style={{width:'100%', alignItems:'center', flex:3, zIndex:1}}>
                     <Pressable style={styles.btn} onPress={Connection}>
                             <Text style={styles.txt2}>S'inscrire</Text>
                     </Pressable>
-            </View>
+                </View>
             <Text style={styles.txt3}>J'ai un compte !</Text>
            </View>
-        )
-    }
-
-    return (
-        <View style={[styles.container, {paddingTop: insets.top, paddingBottom: insets.bottom}]}>
-            <Image source={require('../Illustrations/logosidetoside.png')} style={styles.logo} />
-            <Component1/>
         </View>
         
         
@@ -144,12 +140,12 @@ const styles = StyleSheet.create({
          shadowOpacity: 0.23,
          shadowRadius: 2.62,
          elevation: 4,
-         top:"50%",
+         marginTop:'50%'
     },
     txt1:{
         top:30,
         fontSize:20,
-        fontWeight:'bold'
+        fontWeight:'bold',
     },
     txt2:{
         color:'#D58C8C',
@@ -167,7 +163,7 @@ const styles = StyleSheet.create({
         paddingVertical:15,
         backgroundColor:'#E8B7B7',
         borderRadius:30,
-        fontSize:15
+        fontSize:15,
     },
     
 

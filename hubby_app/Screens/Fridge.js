@@ -12,8 +12,7 @@ import Ingredient from '../Components/Ingredient/Ingredient';
 export default function Fridge({navigation}) {
    
     const insets = useSafeAreaInsets();
-    const [search, setSearch] = useState("");
-    const updateSearch = (search) => { setSearch(search); };
+    const [element, setElement] = useState(null);
 
     useEffect(() => {
         const initFridge = async () => {
@@ -63,7 +62,7 @@ export default function Fridge({navigation}) {
     const remove = async () => {await AsyncStorage.removeItem('fridge'); console.log("done remove"); setFridge([])}
     
     
-    var data = {"key": uuid.v4(),"produit": "orange", "quantite":3}
+    var data = {"key": uuid.v4(),"produit": element, "quantite":1}
     
     const add = async () => {
         var fridge = await AsyncStorage.getItem('fridge'); 
@@ -71,6 +70,7 @@ export default function Fridge({navigation}) {
         else { await AsyncStorage.setItem('fridge', fridge += ','+JSON.stringify(data)); }
         console.log("done add")
         addToState()
+        setElement(null)
     }
 
     const t = async () => { removeKey("b093fe6f-fbde-47c8-8bd6-aa678ed6d175") }
@@ -83,10 +83,10 @@ export default function Fridge({navigation}) {
             <Text onPress={getData}>getData</Text>
             <View style={styles.block1}><Text style={styles.title}>Qu'ai je dans mon frigo ?</Text>
             <SearchBar
-                placeholder="Rechercher"
+                placeholder="Produit à ajouter"
                 placeholderTextColor="white"
-                onChangeText={updateSearch}
-                value={search}
+                onChangeText={setElement}
+                value={element}
                 inputStyle={{}}
                 containerStyle={{backgroundColor:'transparent', width:'90%', borderBottomColor:'transparent',borderTopColor:'transparent', top:20}}
                 inputContainerStyle={{borderRadius:30, backgroundColor:"#E8B7B7", borderWidth:0}}
@@ -103,9 +103,14 @@ export default function Fridge({navigation}) {
 
                 
             </View></ScrollView>
-            <TouchableOpacity activeOpacity={0.8} style={styles.btn} >
-                <Icon name="plus" size={50} color="#FFC5BB"/>
-            </TouchableOpacity>
+            <View style={{flexDirection:'row'}}>
+                <TouchableOpacity activeOpacity={0.8} style={styles.btn} onPress={add}>
+                    <Icon name="plus" size={50} color="#FFC5BB"/>
+                </TouchableOpacity>
+                <TouchableOpacity activeOpacity={0.8} style={styles.btn} onPress={remove}>
+                    <Icon name="close" size={50} color="#FFC5BB"/>
+                </TouchableOpacity>
+            </View>
             
         </View>
     );
@@ -151,6 +156,7 @@ const styles = StyleSheet.create({
         shadowRadius: 7.49,
 
         elevation: 12,
+        marginHorizontal:5
     }
 
 });

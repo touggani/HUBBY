@@ -8,7 +8,7 @@ import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-nativ
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { CommonActions } from '@react-navigation/native';
 
-import pp from "../Illustrations/pp.jpg"
+import pp from "../Illustrations/none.jpeg"
 
 export default function Account({navigation}) {
    

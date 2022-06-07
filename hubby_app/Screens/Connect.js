@@ -116,8 +116,9 @@ export default function Connect({navigation}) {
                     style={styles.input}
                     onChangeText={setId}
                     value={id}
-                    placeholder="Adresse mail ou Identifiant"
+                    placeholder="Adresse mail"
                     keyboardType="email-address"
+                    autoCapitalize='none'
                 />
                 <TextInput
                     style={styles.input}

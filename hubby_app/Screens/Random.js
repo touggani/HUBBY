@@ -1,4 +1,4 @@
-import React, {useEffect, useRef} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {StyleSheet, View, Text, ScrollView, TouchableOpacity} from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -11,11 +11,27 @@ export default function Random({navigation}) {
     const insets = useSafeAreaInsets();
     const refRBSheet = useRef();
 
+    const [recette, setRecette] = useState(null)
+
+    useEffect(() => {
+        const getRandom  = async () => {
+            //await fetch(api_link+'recettes/').then(response => {console.log(response)});
+            const response = await fetch('https://gentle-oasis-78916.herokuapp.com/random/');
+            const jsonresponse = await response.json();
+            setRecette(jsonresponse)
+            
+        }
+        getRandom()
+    },[recette]);
+
+    function toRecetteDetails(){
+        navigation.push('DetailMenu', {recette : recette});
+      }
 
     return (
         <View style={[styles.container, {paddingTop: insets.top}]}>
             <View style={{flex:3, justifyContent:'center', top:50}}><Text style={styles.title}>On te choisit quelque chose ?</Text></View>
-            <View style={{flex:4}}><TouchableOpacity activeOpacity={0.8} style={styles.btn}>
+            <View style={{flex:4}}><TouchableOpacity activeOpacity={0.8} style={styles.btn} onPress={toRecetteDetails}>
                 <Icon name="random" size={130} color="#FFC5BB"/>
             </TouchableOpacity></View>
             <View style={{flex:3, alignItems:'center'}} >
