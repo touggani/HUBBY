@@ -108,7 +108,7 @@ class OrigineViewSet(viewsets.ModelViewSet):
 
 
 class EtapeViewSet(viewsets.ViewSet):
-    def list(self, request):
+    def create(self, request):
         id = request.data['id']
         etape = models.Etape.objects.filter(recette=id).order_by('position')
         serializer = serializers.EtapeSerializer(etape, many=True)
