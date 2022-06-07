@@ -4,6 +4,7 @@
 
 ## Launch back end :
 
+Back end project location: https://github.com/touggani/HUBBY/tree/main/hubby_api
 ```
 $ git clone [https://github.com/touggani/HUBBY](https://github.com/touggani/HUBBY)
 
@@ -13,6 +14,8 @@ $ python3 manage.py runserver –settings Hubby\_api.settings\_local
 ```
 
 ## Launch front end :
+
+Back end project location: https://github.com/touggani/HUBBY/tree/main/hubby_app
 ```
 $ Git clone [https://github.com/touggani/HUBBY](https://github.com/touggani/HUBBY)
 
@@ -140,15 +143,16 @@ Advantages of using MySQL:
 - Heroku
 - Adobe XD
 - GIMP
-<img src="/project_managment/Illustration/md-pics/GitHub.png" width="200" />
-<img src="/project_managment/Illustration/md-pics/docker.png" width="200" />
-<img src="/project_managment/Illustration/md-pics/Adobe_XD.png" width="200" />
-<img src="/project_managment/Illustration/md-pics/gimp.png" width="200" />
-<img src="/project_managment/Illustration/md-pics/Netlify.png" width="200" />
-<img src="/project_managment/Illustration/md-pics/Heroku_logo.png" width="200" />
-<img src="/project_managment/Illustration/md-pics/circleci.png" width="200" />
+<img src="/project_managment/Illustration/md-pics/GitHub.png" width="100" />
+<img src="/project_managment/Illustration/md-pics/docker.png" width="100" />
+<img src="/project_managment/Illustration/md-pics/Adobe_XD.png" width="100" />
+<img src="/project_managment/Illustration/md-pics/gimp.png" width="100" />
+<img src="/project_managment/Illustration/md-pics/Netlify.png" width="100" />
+<img src="/project_managment/Illustration/md-pics/Heroku_logo.png" width="100" />
+<img src="/project_managment/Illustration/md-pics/circleci.png" width="100" />
 
 ## Database schema
+<img src="/project_managment/Documents/BDD/Base_de_donnee.png" />
 
 The data base is open for all. All the table are usable without a JWT excepted the user one.
 
@@ -159,3 +163,6 @@ The API is open for all because we don&#39;t have to block access to data and in
 API link: [https://gentle-oasis-78916.herokuapp.com](https://gentle-oasis-78916.herokuapp.com/)
 
 Other contents:
+All others kinds of element like images, project description, project mockup are located in :
+- https://github.com/touggani/HUBBY/tree/main/project_managment/Documents
+- https://github.com/touggani/HUBBY/tree/main/project_managment/Logo
