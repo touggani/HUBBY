@@ -27,7 +27,7 @@ class RecetteSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = models.Recette
-        fields = ['nom', 'description', 'duree', 'origine']
+        fields = ['id', 'nom', 'description', 'duree', 'origine']
         #fields = '__all__'
 
     def to_representation(self, instance):

@@ -16,10 +16,35 @@ export default function Connect({navigation}) {
 
     const [response, setResponse] = useState(null);
     const [token, setToken] = useState(null);
+    const [userId, setUserId] = useState(null);
+
+    useEffect(() => {
+        const init = async() => {
+        try {
+            await AsyncStorage.setItem('api_token', token)
+          } catch (e) {
+            console.log(e)
+          }
+          try {
+            await AsyncStorage.setItem('isConnected', '1')
+          } catch (e) {
+            console.log(e)
+          }
+          try {
+            await AsyncStorage.setItem('id', userId)
+          } catch (e) {
+            console.log(e)
+          }
+        }
+        if(userId) init()
+    }, [userId])
+
 
     const connect = async (jsonresponse) => {
         const regexEmail = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/
 
+        
+        
         const toHome = async() => {
             try {
                 await AsyncStorage.setItem('api_token', token)
@@ -32,7 +57,7 @@ export default function Connect({navigation}) {
                 console.log(e)
               }
               try {
-                await AsyncStorage.setItem('email', JSON.stringify(id))
+                await AsyncStorage.setItem('id', userId)
               } catch (e) {
                 console.log(e)
               }
@@ -63,8 +88,9 @@ export default function Connect({navigation}) {
             const jsonresponse = await response.json();
             if(jsonresponse.detail) setResponse(jsonresponse.detail)
             else{
-                console.log(jsonresponse.jwt)
+                console.log("id "+jsonresponse)
                 setToken(JSON.stringify(jsonresponse.jwt))
+                setUserId(JSON.stringify(jsonresponse.id))
                 toHome()
                 
             }

@@ -1,13 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import {StyleSheet, View, Text, ScrollView} from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import FavorisCountry from '../Components/FavorisCountry/FavorisCountry';
-import LastDish from '../Components/LastDish/LastDish';
+import FavorisCountry from './FavorisCountry/FavorisCountry';
+import LastDish from './LastDish/LastDish';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { getAllRecettes } from '../Api';
 
 
-export default function Home({navigation}) {
+export default function AZ({navigation}) {
    
     const insets = useSafeAreaInsets();
 
@@ -34,12 +33,7 @@ export default function Home({navigation}) {
             
     return (
         <View style={[styles.container, {paddingTop: insets.top}]}>
-            <ScrollView style={{paddingBottom:30, flex:1}}>
-                <FavorisCountry/>
-                <Text style={styles.title}>Les dernières</Text>
-                <Text style={styles.title}>Recettes</Text>
                 <LastDish recettes={recettes} navigation={navigation}/>
-            </ScrollView>
         </View>
     );
 }
@@ -47,11 +41,6 @@ export default function Home({navigation}) {
 const styles = StyleSheet.create({
     container:{
       flex:1,
-    },
-    title:{
-        fontWeight: 'bold',
-        fontSize:30,
-        paddingLeft:30
-    },
+    }
 
 });

@@ -6,10 +6,8 @@ export default function LastDish({navigation, recettes}) {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>Dernières recettes</Text>
-            <Text style={styles.title}>consultées</Text>
             {recettes && recettes.map((value, index) => (
-                        <DishPreview recette={value} key={index}/>
+                        <DishPreview recette={value} key={index} navigation={navigation}/>
                     ))}
             
             

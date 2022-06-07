@@ -1,14 +1,20 @@
 import React, {} from 'react';
 import {StyleSheet, View, Text, TouchableOpacity, ImageBackground} from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import { CommonActions } from '@react-navigation/native';
+
 
 
 export default function DishPreview({navigation, recette}) {
 
     const temps = recette.duree*100+" min"
 
+    function toRecetteDetails(){
+        navigation.push('DetailMenu', {recette : recette});
+      }
+
     return (
-            <TouchableOpacity activeOpacity={0.8} style={styles.container}>
+            <TouchableOpacity activeOpacity={0.8} style={styles.container} onPress={toRecetteDetails}>
                 <ImageBackground 
                     style={styles.image}
                     source={require("../../Illustrations/burger.png")}>

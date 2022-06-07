@@ -15,7 +15,7 @@ export default function Account({navigation}) {
     const insets = useSafeAreaInsets();
     const refRBSheet = useRef();
     const [connect, setConnect] = useState(null);
-
+    const [response, setResponse] = useState(null);
 
     useEffect(() => {
         const isConnected = async() => {
@@ -26,7 +26,25 @@ export default function Account({navigation}) {
               }
         }
         isConnected()
-    },[]);
+        if(connect == '1'){
+            getUser()
+        }
+    },[connect]);
+
+    const getUser  = async () => {
+        //await fetch(api_link+'recettes/').then(response => {console.log(response)});
+        const response = await fetch('https://gentle-oasis-78916.herokuapp.com/users/'+await AsyncStorage.getItem('id'), {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                //'Authorization': await AsyncStorage.getItem('jwt')
+            }
+        },
+        );
+        const jsonresponse = await response.json();
+        setResponse(jsonresponse)
+    }
     
 
     const toLog = async() => {
@@ -36,7 +54,7 @@ export default function Account({navigation}) {
     const deconnexion = async() => {
         try {
             await AsyncStorage.setItem('isConnected', '0')
-            setConnect(await AsyncStorage.getItem('isConnected'))
+            setConnect(0)
           } catch (e) {
             console.log(e)
           }
@@ -46,12 +64,13 @@ export default function Account({navigation}) {
     if(connect == '1'){
         return (
             <View style={[styles.container, {paddingTop: insets.top}]}>
-                <View style={styles.userNameblock}><Text style={styles.userName}>NOM_UTILISATEUR</Text></View>
+                <View style={styles.userNameblock}>{response &&<Text style={styles.userName}>{response.nom_utilisateur}</Text>}</View>
                 <View style={styles.userPicblock}><Image style={styles.userProfil} source={pp} /></View>
                 <View style={styles.block}>
-                    <TouchableOpacity activeOpacity={0.8} style={styles.btn}>
+                    {response && <View><Text>{response.email}</Text><Text>{response.nom}</Text><Text>{response.prenom}</Text></View>}
+                    {/* <TouchableOpacity activeOpacity={0.8} style={styles.btn}>
                         <Text>Editer mon profil</Text>
-                    </TouchableOpacity>
+                    </TouchableOpacity> */}
                     <TouchableOpacity activeOpacity={0.8} style={[styles.btn, {top:30}]} onPress={deconnexion}>
                         <Text>Se deconnecter</Text>
                     </TouchableOpacity>

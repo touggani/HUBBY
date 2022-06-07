@@ -10,29 +10,97 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 export default function CreateAccount({navigation}) {
     const insets = useSafeAreaInsets();
 
+    const [nom, setNom] = useState(null);
+    const [prenom, setPrenom] = useState(null);
+    const [email, setEmail] = useState(null);
+    const [id, setId] = useState(null);
+    const [pw, setPw] = useState(null);
 
 
-    function connect(){
+    const [error, setError] = useState(null);
+
+    const Connection  = async () => {
+        //await fetch(api_link+'recettes/').then(response => {console.log(response)});
+        const response = await fetch('https://gentle-oasis-78916.herokuapp.com/connexion/', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({"email":id, "password":pw})
+        },
+        );
+        if(response.status == 200){
+            navigation.dispatch(
+                CommonActions.reset({
+                  index: 1,
+                  routes: [
+                    {
+                      name: 'Connect',
+                      params: { screen: 'Log' },
+                    },
+                  ],
+                })
+              );
+        }
+        else{
+            setError("Echec de création de compte")
+        }
+        const jsonresponse = await response.json();
         
-    }
+            
+        }
+
 
     const Component1 = () => {
         return (
-            <View style={{alignItems:'center', flex:1}}>
+            <View style={{alignItems:'center', flex:1, width:"100%"}}>
                 
                 <View style={{alignItems:'center', flex:2,justifyContent:'center'}}>
                     <Image source={require('../Illustrations/chef.png')} style={styles.gif} />
-                    <Text style={styles.txt1}>Te revoilà !</Text>
+                    <Text style={styles.txt1}>Bienvenue !</Text>
                 </View>
-                <View style={{width:'100%', alignItems:'center', flex:1,top:'5%',justifyContent:'center'}}>
-                    <Text>BLABLABLA</Text>
-                </View>
+                <View style={{width:'100%', alignItems:'center', flex:3,top:'5%'}}>
+                <TextInput
+                    style={styles.input}
+                    onChangeText={setNom}
+                    value={nom}
+                    placeholder="nom"
+                />
+                <TextInput
+                    style={styles.input}
+                    onChangeText={setPrenom}
+                    value={prenom}
+                    placeholder="Prenom"
+                />
+                <TextInput
+                    style={styles.input}
+                    onChangeText={setEmail}
+                    value={email}
+                    placeholder="Adresse mail"
+                    keyboardType="email-address"
+                />
+                <TextInput
+                    style={styles.input}
+                    onChangeText={setId}
+                    value={id}
+                    placeholder="Nom d'utilisateur"
+                />
+                <TextInput
+                    style={styles.input}
+                    onChangeText={setPw}
+                    value={pw}
+                    placeholder="Mot de passe"
+                    secureTextEntry={true}
+                />
+            </View>
+                {error && <Text style={{top:"21%", fontWeight:"bold"}}>{error}</Text>}
                 <View style={{width:'100%', alignItems:'center', flex:3,top:'5%', top:40}}>
-                    <Pressable style={styles.btn} onPress={connect}>
-                            <Text style={styles.txt2}>Se connecter</Text>
+                    <Pressable style={styles.btn} onPress={Connection}>
+                            <Text style={styles.txt2}>S'inscrire</Text>
                     </Pressable>
             </View>
-            <Text style={styles.txt3}>Je n'ai pas de compte</Text>
+            <Text style={styles.txt3}>J'ai un compte !</Text>
            </View>
         )
     }
@@ -76,7 +144,7 @@ const styles = StyleSheet.create({
          shadowOpacity: 0.23,
          shadowRadius: 2.62,
          elevation: 4,
-         top:30
+         top:"50%",
     },
     txt1:{
         top:30,
@@ -91,7 +159,16 @@ const styles = StyleSheet.create({
     txt3:{
         fontSize:15,
         fontWeight:'bold'
-    }
+    },
+    input:{
+        width:'100%',
+        marginTop:20,
+        paddingHorizontal:20,
+        paddingVertical:15,
+        backgroundColor:'#E8B7B7',
+        borderRadius:30,
+        fontSize:15
+    },
     
 
     

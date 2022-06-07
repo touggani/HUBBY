@@ -4,6 +4,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { SearchBar } from 'react-native-elements';
 import { color } from 'react-native-elements/dist/helpers';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import AZ from '../Components/AZ';
 
 import ListCountries from '../Components/ListCountries/ListCountries'
 
@@ -47,7 +48,7 @@ export default function Menu({navigation}) {
                     <View style={styles.scrollList}>
                         <View style={styles.list}> 
                             {active === 1 ? 
-                                <Text>1</Text> : 
+                                <AZ navigation={navigation}/> : 
                                 <ListCountries/>}
                         </View> 
                     </View>

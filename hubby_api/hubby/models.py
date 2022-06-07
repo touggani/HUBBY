@@ -51,7 +51,7 @@ class Recette(models.Model):
 class Etape(models.Model):
     recette = models.ForeignKey(Recette, on_delete=models.CASCADE)
     description = models.TextField(max_length=255, blank=True)
-    position = models.IntegerField(unique=True)
+    position = models.IntegerField()
 
     def __str__(self):
         return self.recette.nom+" / Etape: "+str(self.position)

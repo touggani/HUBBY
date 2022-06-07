@@ -82,6 +82,15 @@ class UserViewSet(viewsets.ModelViewSet):
         serializer = serializers.UserSerializer(user, many=True)
         return Response(serializer.data)
 
+    def retreive(self, request):
+        #token = str(request.headers.get('Authorization'))
+        checkUserToken(str(request.headers.get('Authorization')))
+
+        #user = models.User.objects.get(id=payload['id']).first
+        user = models.User.objects.all()
+        serializer = serializers.UserSerializer(user, many=True)
+        return Response(serializer.data)
+
 
 class RecetteViewSet(viewsets.ModelViewSet):
     serializer_class = serializers.RecetteSerializer
@@ -98,9 +107,12 @@ class OrigineViewSet(viewsets.ModelViewSet):
     serializer_class = serializers.OrigineSerializer
 
 
-class EtapeViewSet(viewsets.ModelViewSet):
-    queryset = models.Etape.objects.all()
-    serializer_class = serializers.EtapeSerializer
+class EtapeViewSet(viewsets.ViewSet):
+    def list(self, request):
+        id = request.data['id']
+        etape = models.Etape.objects.filter(recette=id).order_by('position')
+        serializer = serializers.EtapeSerializer(etape, many=True)
+        return Response(serializer.data)
 
 
 class IngredientViewSet(viewsets.ModelViewSet):

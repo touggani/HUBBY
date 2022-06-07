@@ -1,5 +1,4 @@
 from django.urls import include, path
-from hubby import views
 from django.contrib import admin
 from .router import router
 
