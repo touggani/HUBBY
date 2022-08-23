@@ -77,22 +77,14 @@ class UserViewSet(viewsets.ModelViewSet):
         #token = str(request.headers.get('Authorization'))
         checkUserToken(str(request.headers.get('Authorization')))
 
-        #user = models.User.objects.get(id=payload['id']).first
-        #user = models.User.objects.all()
-        #serializer = serializers.UserSerializer(user, many=True)
-        # return Response(serializer.data)
-
-        #id = request.data['id']
-        return "ok"
-
-    def retreive(self, request):
-        #token = str(request.headers.get('Authorization'))
-        checkUserToken(str(request.headers.get('Authorization')))
-
-        #user = models.User.objects.get(id=payload['id']).first
-        user = models.User.objects.all()
+        playload = jwt.decode(request.headers.get('Authorization'), 'secret',
+                              algorithm='HS256')
+        user = models.User.objects.filter(id=playload["id"])
         serializer = serializers.UserSerializer(user, many=True)
         return Response(serializer.data)
+
+        id = request.data['id']
+        # return "ok"
 
 
 class RecetteViewSet(viewsets.ViewSet):
