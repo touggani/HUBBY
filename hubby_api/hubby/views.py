@@ -78,9 +78,12 @@ class UserViewSet(viewsets.ModelViewSet):
         checkUserToken(str(request.headers.get('Authorization')))
 
         #user = models.User.objects.get(id=payload['id']).first
-        user = models.User.objects.all()
-        serializer = serializers.UserSerializer(user, many=True)
-        return Response(serializer.data)
+        #user = models.User.objects.all()
+        #serializer = serializers.UserSerializer(user, many=True)
+        # return Response(serializer.data)
+
+        #id = request.data['id']
+        return "ok"
 
     def retreive(self, request):
         #token = str(request.headers.get('Authorization'))
@@ -92,7 +95,7 @@ class UserViewSet(viewsets.ModelViewSet):
         return Response(serializer.data)
 
 
-class RecetteViewSet(viewsets.ModelViewSet):
+class RecetteViewSet(viewsets.ViewSet):
     serializer_class = serializers.RecetteSerializer
     queryset = ''
 
@@ -102,19 +105,34 @@ class RecetteViewSet(viewsets.ModelViewSet):
         return Response(serializer.data)
 
 
-class OrigineViewSet(viewsets.ModelViewSet):
-    queryset = models.Origine.objects.all()
+class OrigineViewSet(viewsets.ViewSet):
+    """ queryset = models.Origine.objects.all()
     serializer_class = serializers.OrigineSerializer
+ """
+    serializer_class = serializers.RecetteSerializer
+    queryset = ''
+
+    def list(self, request):
+        origine = models.Origine.objects.all()
+        serializer = serializers.OrigineSerializer(origine, many=True)
+        return Response(serializer.data)
 
 
 class EtapeViewSet(viewsets.ViewSet):
-    def create(self, request):
-        id = request.data['id']
-        etape = models.Etape.objects.filter(recette=id).order_by('position')
+    serializer_class = serializers.RecetteSerializer
+    queryset = ''
+
+    def list(self, request):
+        etape = models.Etape.objects.all()
         serializer = serializers.EtapeSerializer(etape, many=True)
         return Response(serializer.data)
 
 
-class IngredientViewSet(viewsets.ModelViewSet):
-    queryset = models.Ingredient.objects.all()
-    serializer_class = serializers.IngredientSerializer
+class IngredientViewSet(viewsets.ViewSet):
+    serializer_class = serializers.RecetteSerializer
+    queryset = ''
+
+    def list(self, request):
+        ingredient = models.Ingredient.objects.all()
+        serializer = serializers.IngredientSerializer(ingredient, many=True)
+        return Response(serializer.data)
