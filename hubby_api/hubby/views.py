@@ -114,8 +114,8 @@ class EtapeViewSet(viewsets.ViewSet):
     serializer_class = serializers.RecetteSerializer
     queryset = ''
 
-    def list(self, request):
-        etape = models.Etape.objects.all()
+    def retrieve(self, request, pk=None):
+        etape = models.Etape.objects.filter(recette=pk)
         serializer = serializers.EtapeSerializer(etape, many=True)
         return Response(serializer.data)
 

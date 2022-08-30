@@ -55,9 +55,9 @@ export default function DetailMenu({route, navigation}) {
                             <Text style={styles.item} key={index}>{'\u2022'}{value.nom}</Text>
                         ))}
                         <Text style={styles.title}>Les étapes de préparation:</Text>
-                        {etape.map((value, index) => (
+                        {/*etape ? etape.map((value, index) => (
                             <Text style={styles.item} key={index}>{index+1+". "}{value.description}</Text>
-                        ))}
+                        )) : <Text>HELLO</Text>*/}
 
                     </View>
                 </View>

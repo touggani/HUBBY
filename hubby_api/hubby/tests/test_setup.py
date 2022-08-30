@@ -5,16 +5,16 @@ from django.urls import reverse
 class TestSetup(APITestCase):
 
     def setUp(self):
-        self.user_url = reverse("user")
+        self.user_url = reverse("user-list")
         # self.user_url = reverse("recette")
         # self.user_url = reverse("origine")
         # self.user_url = reverse("etape")
         # self.user_url = reverse("ingredient")
         # self.user_url = reverse("random")
-        # self.user_url = reverse("inscription")
-        # self.user_url = reverse("connexion")
+        self.register_url = reverse("inscription-list")
+        self.login_url = reverse("connexion-list")
 
-        user_data = {
+        self.user_data = {
             "nom": "touggani",
             "prenom": "youssef",
             "email": "youssef@email.com",
