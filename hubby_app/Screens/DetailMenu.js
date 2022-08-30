@@ -15,14 +15,13 @@ export default function DetailMenu({route, navigation}) {
 
         const getAllRecettes  = async () => {
             //await fetch(api_link+'recettes/').then(response => {console.log(response)});
-            const response = await fetch('https://gentle-oasis-78916.herokuapp.com/etapes/', {
-                method: 'POST',
+            const response = await fetch('https://gentle-oasis-78916.herokuapp.com/etapes/'+recette.id, {
+                method: 'GET',
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
                     //'Authorization': await AsyncStorage.getItem('jwt')
                 },
-                body: JSON.stringify({"id": recette.id})
             },);
             const jsonresponse = await response.json();
             setEtape(jsonresponse)
@@ -55,9 +54,9 @@ export default function DetailMenu({route, navigation}) {
                             <Text style={styles.item} key={index}>{'\u2022'}{value.nom}</Text>
                         ))}
                         <Text style={styles.title}>Les étapes de préparation:</Text>
-                        {/*etape ? etape.map((value, index) => (
+                        {etape ? etape.map((value, index) => (
                             <Text style={styles.item} key={index}>{index+1+". "}{value.description}</Text>
-                        )) : <Text>HELLO</Text>*/}
+                        )) : <Text>HELLO</Text>}
 
                     </View>
                 </View>
