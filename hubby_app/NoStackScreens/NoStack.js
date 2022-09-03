@@ -23,7 +23,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
     try {
       const value = await AsyncStorage.getItem('firstOpen')
       if(value !== null) {
-          if(value !== '1'){ navigation.navigate('Main') }
+          if(value !== '0'){ navigation.navigate('Main') }
         
       }
     } catch(e) {

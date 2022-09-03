@@ -1,7 +1,7 @@
 import React, {useState,useEffect} from 'react';
-import {StyleSheet, View, Text, ScrollView, FlatList, Image} from 'react-native';
+import {StyleSheet, View, Text, ScrollView, FlatList, Image, Pressable} from 'react-native';
 import image from '../Illustrations/none.jpeg'
-
+import Btn from '../Components/Btn';
 
 
 export default function DetailMenu({route, navigation}) {
@@ -35,6 +35,13 @@ export default function DetailMenu({route, navigation}) {
         if(recette)setTemps(recette.duree*100+" min")
     }, [recette])
     
+    useEffect(() => {
+        const toStep  = () => {
+            navigation.push('CookingInstructions', {
+                step: etape,
+            })
+        }
+    }, [etape])
 
     return (
         
@@ -53,10 +60,17 @@ export default function DetailMenu({route, navigation}) {
                         {recette.Ingredient.map((value, index) => (
                             <Text style={styles.item} key={index}>{'\u2022'}{value.nom}</Text>
                         ))}
-                        <Text style={styles.title}>Les étapes de préparation:</Text>
-                        {etape ? etape.map((value, index) => (
+                        <View style={{alignItems:'center'}}>
+                        {etape ? <Pressable style={styles.btn} onPress={() => {navigation.push('CookingInstructions', {
+                                etape: etape,
+                            })}}>
+                            <Text style={styles.txt}>Commencer</Text>
+                        </Pressable> : null}
+                        </View>
+                        {/*<Text style={styles.title}>Les étapes de préparation:</Text>
+                        etape ? etape.map((value, index) => (
                             <Text style={styles.item} key={index}>{index+1+". "}{value.description}</Text>
-                        )) : <Text>HELLO</Text>}
+                        )) : null*/}
 
                     </View>
                 </View>
@@ -71,10 +85,12 @@ export default function DetailMenu({route, navigation}) {
 const styles = StyleSheet.create({
     container:{
         paddingTop:30,
+        flex:1,
+        display:'flex'
     },
     informations:{
         paddingHorizontal:'5%',
-        marginTop:20
+        marginTop:20,
     },
     image:{
         width:"100%"
@@ -87,6 +103,30 @@ const styles = StyleSheet.create({
         paddingBottom:5,
         fontSize:16,
         fontWeight:"bold"
+    },
+    btn:{
+        alignItems:'center',
+        justifyContent:'center',
+        width:280,
+        height:50,
+        backgroundColor:'#F8F0E1',
+        borderRadius:30,
+        shadowColor: "#000",
+         shadowOffset: {
+             width: 0,
+             height: 2,
+         },
+         shadowOpacity: 0.23,
+         shadowRadius: 2.62,
+ 
+         elevation: 4,
+         top:40,
+         bottom:40
+    },
+    txt:{
+        color:'#D58C8C',
+        fontSize:20,
+        fontWeight:'bold'
     }
     
 });
