@@ -16,3 +16,5 @@ router.register('inscription', views.InscriptionViewSet,
 router.register('connexion', views.ConnexionViewSet,
                 basename='connexion')
 router.register('random', views.RandomViewSet, basename='random')
+router.register('commentaire', views.CommentaireViewSet,
+                basename='commentaire')

@@ -55,3 +55,12 @@ class Etape(models.Model):
 
     def __str__(self):
         return self.recette.nom+" / Etape: "+str(self.position)
+
+
+class Commentaire(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    recette = models.ForeignKey(Recette, on_delete=models.CASCADE)
+    commentaire = models.TextField(max_length=255, blank=True)
+
+    def __str__(self):
+        return self.user.nom+" / recette: "+str(self.recette.id)

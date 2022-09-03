@@ -128,3 +128,27 @@ class IngredientViewSet(viewsets.ViewSet):
         ingredient = models.Ingredient.objects.all()
         serializer = serializers.IngredientSerializer(ingredient, many=True)
         return Response(serializer.data)
+
+
+class CommentaireViewSet(viewsets.ViewSet):
+    serializer_class = serializers.CommentaireSerializer
+    queryset = ''
+
+    def list(self, request):
+        checkUserToken(str(request.headers.get('Authorization')))
+        commentaire = models.Commentaire.objects.all()
+        serializer = serializers.CommentaireSerializer(commentaire, many=True)
+        return Response(serializer.data)
+
+    def retrieve(self, request, pk=None):
+        checkUserToken(str(request.headers.get('Authorization')))
+        commentaire = models.Commentaire.objects.filter(recette=pk)
+        serializer = serializers.CommentaireSerializer(commentaire, many=True)
+        return Response(serializer.data)
+
+    def create(self, request):
+        checkUserToken(str(request.headers.get('Authorization')))
+        serializer = serializers.CommentaireSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data)

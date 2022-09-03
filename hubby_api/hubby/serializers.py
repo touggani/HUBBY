@@ -54,3 +54,9 @@ class IngredientSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Ingredient
         fields = '__all__'
+
+
+class CommentaireSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Commentaire
+        fields = '__all__'
