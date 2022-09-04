@@ -1,5 +1,6 @@
 #from django.contrib.auth.models import User, Group
 from hashlib import algorithms_available
+from click import echo
 from django.http import JsonResponse
 from rest_framework import viewsets
 from hubby import serializers
@@ -12,6 +13,7 @@ import datetime
 
 
 def checkUserToken(token):
+    print("ICI "+token)
     if not token:
         raise AuthenticationFailed("Utilisateur pas connecté !")
 
@@ -135,13 +137,13 @@ class CommentaireViewSet(viewsets.ViewSet):
     queryset = ''
 
     def list(self, request):
-        checkUserToken(str(request.headers.get('Authorization')))
+        checkUserToken(request.headers.get('Authorization'))
         commentaire = models.Commentaire.objects.all()
         serializer = serializers.CommentaireSerializer(commentaire, many=True)
         return Response(serializer.data)
 
     def retrieve(self, request, pk=None):
-        checkUserToken(str(request.headers.get('Authorization')))
+        checkUserToken(str(request.headers.get('Authentication')))
         commentaire = models.Commentaire.objects.filter(recette=pk)
         serializer = serializers.CommentaireSerializer(commentaire, many=True)
         return Response(serializer.data)
