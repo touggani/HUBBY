@@ -117,7 +117,7 @@ export default function DetailMenu({route, navigation}) {
                     value={inputCommentaire}
                     placeholder="Commentaire"
                 />
-                { commentaire && recette ? <Pressable style={styles.btn_com} onPress={() => {sendCommentaire(); window.location.reload()}}>
+                { commentaire && recette ? <Pressable style={styles.btn_com} onPress={() => {sendCommentaire();setInputCommentaire("")}}>
                             <Text style={styles.txt_com}>Envoyé</Text> 
                 </Pressable>: null}
             </View>
