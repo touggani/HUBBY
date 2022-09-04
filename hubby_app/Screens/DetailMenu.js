@@ -3,6 +3,7 @@ import {StyleSheet, View, Text, ScrollView, FlatList, Image, Pressable, TextInpu
 import image from '../Illustrations/none.jpeg'
 import Btn from '../Components/Btn';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { getAllRecettes } from '../Api';
 
 
 export default function DetailMenu({route, navigation}) {
@@ -12,6 +13,7 @@ export default function DetailMenu({route, navigation}) {
     const [temps, setTemps] = useState(null)
     const [etape, setEtape] = useState(null)
     const [inputCommentaire, setInputCommentaire] = useState(null)
+    const [change, setChange] = useState(null)
 
 
 
@@ -32,7 +34,7 @@ export default function DetailMenu({route, navigation}) {
             setEtape(jsonresponse)
         }
         if(recette) getAllRecettes()
-    }, [recette])
+    }, [recette, change])
 
 
 
@@ -67,10 +69,9 @@ export default function DetailMenu({route, navigation}) {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({"commentaire": inputCommentaire, "user":parseInt(await AsyncStorage.getItem('api_token')),"recette":recette.id, })
+                body: JSON.stringify({"commentaire": inputCommentaire, "user":parseInt(await AsyncStorage.getItem('id')),"recette":recette.id, })
             },);
-            const jsonresponse = await response.json();
-            console.log("reponse "+JSON.stringify(jsonresponse))
+            
     }
 
     return (
@@ -116,7 +117,7 @@ export default function DetailMenu({route, navigation}) {
                     value={inputCommentaire}
                     placeholder="Commentaire"
                 />
-                { commentaire && recette ? <Pressable style={styles.btn_com} onPress={() => {sendCommentaire()}}>
+                { commentaire && recette ? <Pressable style={styles.btn_com} onPress={() => {sendCommentaire(); window.location.reload()}}>
                             <Text style={styles.txt_com}>Envoyé</Text> 
                 </Pressable>: null}
             </View>

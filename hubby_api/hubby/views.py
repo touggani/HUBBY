@@ -13,7 +13,6 @@ import datetime
 
 
 def checkUserToken(token):
-    print("ICI "+token)
     if not token:
         raise AuthenticationFailed("Utilisateur pas connecté !")
 
