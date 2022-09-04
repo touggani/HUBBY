@@ -1,5 +1,5 @@
 import React, {useState,useEffect} from 'react';
-import {StyleSheet, View, Text, ScrollView, FlatList, Image, Pressable} from 'react-native';
+import {StyleSheet, View, Text, ScrollView, FlatList, Image, Pressable, TextInput} from 'react-native';
 import image from '../Illustrations/none.jpeg'
 import Btn from '../Components/Btn';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -11,6 +11,8 @@ export default function DetailMenu({route, navigation}) {
     const [commentaire, setCommentaire] = useState(null)
     const [temps, setTemps] = useState(null)
     const [etape, setEtape] = useState(null)
+    const [inputCommentaire, setInputCommentaire] = useState(null)
+
 
 
 
@@ -36,18 +38,12 @@ export default function DetailMenu({route, navigation}) {
 
     useEffect(() => {
         const getAllCommentaire  = async () => {
-            var token = await AsyncStorage.getItem('api_token')
-            token = token.slice(0, -1);
-            token = token.substring(3);
-            console.log(token)
             //await fetch(api_link+'recettes/').then(response => {console.log(response)});
             const response = await fetch('https://gentle-oasis-78916.herokuapp.com/commentaire/'+recette.id, {
                 method: 'GET',
                 headers: {
                     'Accept': 'application/json',
-                    'Content-Type': 'application/json',
-                    'Authentication' : String(token)
-                    //await AsyncStorage.getItem('api_token')
+                    'Content-Type': 'application/json'
                 },
             },);
             const jsonresponse = await response.json();
@@ -64,13 +60,18 @@ export default function DetailMenu({route, navigation}) {
         if(recette)setTemps(recette.duree*100+" min")
     }, [recette])
     
-    useEffect(() => {
-        const toStep  = () => {
-            navigation.push('CookingInstructions', {
-                step: etape,
-            })
-        }
-    }, [etape])
+    const sendCommentaire  = async () => {
+        const response = await fetch('https://gentle-oasis-78916.herokuapp.com/commentaire/', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({"commentaire": inputCommentaire, "user":parseInt(await AsyncStorage.getItem('api_token')),"recette":recette.id, })
+            },);
+            const jsonresponse = await response.json();
+            console.log("reponse "+JSON.stringify(jsonresponse))
+    }
 
     return (
         
@@ -104,7 +105,21 @@ export default function DetailMenu({route, navigation}) {
                     </View>
                 </View>
             }
-            <Text style={{marginTop:'20%', fontSize:25}}>Commentaires:</Text>
+            <View style={{marginTop:'20%', fontSize:25, paddingHorizontal:30}}>
+                <Text style={{fontSize:25}}>Commentaires:</Text>
+                { commentaire ? commentaire.map((value, index) => (
+                                <Text style={styles.com} key={index}>{index+1+". "}{value.commentaire}</Text>
+                            )) : null}
+                <TextInput
+                    style={styles.input}
+                    onChangeText={setInputCommentaire}
+                    value={inputCommentaire}
+                    placeholder="Commentaire"
+                />
+                { commentaire && recette ? <Pressable style={styles.btn_com} onPress={() => {sendCommentaire()}}>
+                            <Text style={styles.txt_com}>Envoyé</Text> 
+                </Pressable>: null}
+            </View>
             </ScrollView>
             
             
@@ -157,6 +172,31 @@ const styles = StyleSheet.create({
         color:'#D58C8C',
         fontSize:20,
         fontWeight:'bold'
+    }, 
+    com:{
+        paddingVertical:20
+    },
+    input:{
+        width:'100%',
+        marginTop:20,
+        paddingHorizontal:20,
+        paddingVertical:15,
+        backgroundColor:'#E5E5E5',
+        borderRadius:10,
+        fontSize:15,
+    },
+    btn_com:{
+        marginVertical:'10%',
+        backgroundColor:'#E5E5E5',
+        textAlign:'center',
+        paddingVertical:'5%',
+        
+    },
+    txt_com:{
+        color:'#D58C8C',
+        fontSize:20,
+        fontWeight:'bold',
+        textAlign:'center'
     }
     
 });

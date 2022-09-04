@@ -148,7 +148,6 @@ class CommentaireViewSet(viewsets.ViewSet):
         return Response(serializer.data)
 
     def create(self, request):
-        checkUserToken(str(request.headers.get('Authorization')))
         serializer = serializers.CommentaireSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         serializer.save()
