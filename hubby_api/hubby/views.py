@@ -143,7 +143,6 @@ class CommentaireViewSet(viewsets.ViewSet):
         return Response(serializer.data)
 
     def retrieve(self, request, pk=None):
-        checkUserToken(str(request.headers.get('Authentication')))
         commentaire = models.Commentaire.objects.filter(recette=pk)
         serializer = serializers.CommentaireSerializer(commentaire, many=True)
         return Response(serializer.data)

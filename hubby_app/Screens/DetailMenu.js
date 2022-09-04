@@ -13,6 +13,7 @@ export default function DetailMenu({route, navigation}) {
     const [etape, setEtape] = useState(null)
 
 
+
     useEffect(() => {
 
         const getAllRecettes  = async () => {
@@ -31,17 +32,21 @@ export default function DetailMenu({route, navigation}) {
         if(recette) getAllRecettes()
     }, [recette])
 
+
+
     useEffect(() => {
-        
         const getAllCommentaire  = async () => {
-            //console.log(await AsyncStorage.getItem('api_token'))
+            var token = await AsyncStorage.getItem('api_token')
+            token = token.slice(0, -1);
+            token = token.substring(3);
+            console.log(token)
             //await fetch(api_link+'recettes/').then(response => {console.log(response)});
             const response = await fetch('https://gentle-oasis-78916.herokuapp.com/commentaire/'+recette.id, {
                 method: 'GET',
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
-                    'Authentication' : "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6NywiZXhwIjoxNjYyMjkzMjY1LCJpYXQiOjE2NjIyODk2NjV9.tPczHQ_y1Xybg3LsYKy629dS_oMO3LZgKQw0IpcrEfw"
+                    'Authentication' : String(token)
                     //await AsyncStorage.getItem('api_token')
                 },
             },);
